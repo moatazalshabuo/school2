@@ -24,6 +24,17 @@
 
             </ul>
         </li>
+        <!-- Subjects-->
+        <li>
+            <a href="javascript:void(0);" data-toggle="collapse" data-target="#Subjects">
+                <div class="pull-left"><i class="fas fa-book-open"></i><span class="right-nav-text">المواد الدراسية</span></div>
+                <div class="pull-right"><i class="ti-plus"></i></div>
+                <div class="clearfix"></div>
+            </a>
+            <ul id="Subjects" class="collapse" data-parent="#sidebarnav">
+                <li> <a href="{{route('subject.index')}}">قائمة المواد</a> </li>
+            </ul>
+        </li>
         <!-- classes-->
         <li>
             <a href="javascript:void(0);" data-toggle="collapse" data-target="#classes-menu">
@@ -140,17 +151,7 @@
             </ul>
         </li>
 
-        <!-- Subjects-->
-        <li>
-            <a href="javascript:void(0);" data-toggle="collapse" data-target="#Subjects">
-                <div class="pull-left"><i class="fas fa-book-open"></i><span class="right-nav-text">المواد الدراسية</span></div>
-                <div class="pull-right"><i class="ti-plus"></i></div>
-                <div class="clearfix"></div>
-            </a>
-            <ul id="Subjects" class="collapse" data-parent="#sidebarnav">
-                <li> <a href="{{route('subjects.index')}}">قائمة المواد</a> </li>
-            </ul>
-        </li>
+        
 
         <!-- Quizzes-->
         <li>

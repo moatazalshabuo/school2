@@ -44,34 +44,6 @@
                                     </div>
                                 </div>
                                 <br>
-
-                                <div class="form-row">
-                                    <div class="form-group col">
-                                        <label for="inputState">المرحلة الدراسية</label>
-                                        <select class="custom-select my-1 mr-sm-2" name="Grade_id">
-                                            <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
-                                            @foreach($grades as $grade)
-                                                <option value="{{$grade->id}}">{{$grade->Name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col">
-                                        <label for="inputState">الصف الدراسي</label>
-                                        <select name="Class_id" class="custom-select"></select>
-                                    </div>
-
-
-                                    <div class="form-group col">
-                                        <label for="inputState">اسم المعلم</label>
-                                        <select class="custom-select my-1 mr-sm-2" name="teacher_id">
-                                            <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
-                                            @foreach($teachers as $teacher)
-                                                <option value="{{$teacher->id}}">{{$teacher->Name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                                 <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">حفظ البيانات</button>
                             </form>
                         </div>

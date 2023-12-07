@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
 <link href="{{ URL::asset('css/wizard.css') }}" rel="stylesheet" id="bootstrap-css">
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 @yield('css')
 <!--- Style css -->
@@ -23,3 +23,9 @@
 @else
     <link href="{{ URL::asset('assets/css/rtl.css') }}" rel="stylesheet">
 @endif
+
+<style>
+    .select2-container{
+        width: 100% !important;
+    }
+    </style>
