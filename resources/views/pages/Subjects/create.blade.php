@@ -61,8 +61,8 @@
                                         <select name="Class_id" class="custom-select"></select>
                                     </div>
 
-
-                                    <div class="form-group col">
+{{-- تعليق اسم المعلم مع المادة --}}
+                                    {{-- <div class="form-group col">
                                         <label for="inputState">اسم المعلم</label>
                                         <select class="custom-select my-1 mr-sm-2" name="teacher_id">
                                             <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
@@ -70,7 +70,7 @@
                                                 <option value="{{$teacher->id}}">{{$teacher->Name}}</option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">حفظ البيانات</button>
                             </form>

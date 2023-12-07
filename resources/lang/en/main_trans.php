@@ -33,7 +33,9 @@ return [
     'Settings'=>'Settings',
     'Users'=>'Users',
     'Copyright' => 'Copyright',
-    'Name_Programer' => 'SamirGamal MoraSoft All Rights Reserved'
+    'Name_Programer' => 'SamirGamal MoraSoft All Rights Reserved',
+    'Years'=>'Years',
+    'list_Years'=>'list_Years'
 
 
 ];

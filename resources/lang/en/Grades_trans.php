@@ -20,5 +20,15 @@ return [
     'exists'=>'This field already exists',
     'Delete'=>'Delete',
     'Close' => 'Close',
+    'add_Year'=>'add_Year',
+    'academic_year'=>'academic_year',
+    'start_date'=>'start_date',
+    'end_date' =>'end_date',
+    'status'=>'status',
+    'active'=>'active',
+    'inactive'=>'inactive',
+    'delete_AcademicYear'=>'delete_AcademicYear',
+    'Warning_AcademicYear'=>'Warning_AcademicYear',
+    'list_Years'=>'list_Years'
 
 ];

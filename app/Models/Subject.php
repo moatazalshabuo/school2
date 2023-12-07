@@ -10,8 +10,8 @@ class Subject extends Model
     use HasTranslations;
 
     public $translatable = ['name'];
-
-    protected $fillable = ['name','grade_id','classroom_id','teacher_id'];
+    protected $fillable = ['name','grade_id','classroom_id'];
+    // protected $fillable = ['name','grade_id','classroom_id','teacher_id'];
 
 
     // جلب اسم المراحل الدراسية
@@ -28,10 +28,10 @@ class Subject extends Model
     }
 
     // جلب اسم المعلم
-    public function teacher()
-    {
-        return $this->belongsTo('App\Models\Teacher', 'teacher_id');
-    }
+    // public function teacher()
+    // {
+    //     return $this->belongsTo('App\Models\Teacher', 'teacher_id');
+    // }
 
 
 }

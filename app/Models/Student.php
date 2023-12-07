@@ -78,4 +78,9 @@ class Student extends Authenticatable
         return $this->hasMany('App\Models\Attendance', 'student_id');
     }
 
+    public function academicYear()
+    {
+        return $this->belongsTo('App\Models\academic_year','academic_year_id ');
+    }
+
 }

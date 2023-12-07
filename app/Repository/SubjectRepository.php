@@ -32,7 +32,7 @@ class SubjectRepository implements SubjectRepositoryInterface
             $subjects->name = ['en' => $request->Name_en, 'ar' => $request->Name_ar];
             $subjects->grade_id = $request->Grade_id;
             $subjects->classroom_id = $request->Class_id;
-            $subjects->teacher_id = $request->teacher_id;
+            // $subjects->teacher_id = $request->teacher_id;
             $subjects->save();
             toastr()->success(trans('messages.success'));
             return redirect()->route('subjects.create');

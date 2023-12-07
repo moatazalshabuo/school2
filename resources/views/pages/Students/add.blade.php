@@ -166,14 +166,13 @@
                             <div class="form-group">
                                 <label for="academic_year">{{ trans('Students_trans.academic_year') }} : <span
                                         class="text-danger">*</span></label>
-                                <select class="custom-select mr-sm-2" name="academic_year">
+                                <select class="custom-select mr-sm-2" name="academic_year_id">
                                     <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
-                                    @php
-                                        $current_year = date('Y');
-                                    @endphp
-                                    @for ($year = $current_year; $year <= $current_year + 1; $year++)
-                                        <option value="{{ $year }}">{{ $year }}</option>
-                                    @endfor
+                                    @foreach ($academic_years as $academic_year)
+                                        {{-- <option value="{{ $academic_year->id }}">{{ $academic_year->start_date; $academic_year->start_date; }}</option> --}}
+                                        <option value="{{ $academic_year->id }}">{{ \Carbon\Carbon::parse($academic_year->start_date)->format('Y') }}</option>
+
+                                        @endforeach
                                 </select>
                             </div>
                         </div>

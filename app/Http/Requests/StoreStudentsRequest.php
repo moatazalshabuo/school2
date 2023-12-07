@@ -36,7 +36,7 @@ class StoreStudentsRequest extends FormRequest
             'Classroom_id' => 'required',
             'section_id' => 'required',
             'parent_id' => 'required',
-            'academic_year' => 'required',
+            // 'academic_year' => 'required',
         ];
     }
 }
