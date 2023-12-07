@@ -114,5 +114,11 @@ Route::group([
 
     //==============================Setting============================
     Route::resource('settings', 'SettingController');
+    
 });
 
+
+      //==============================acadmicYaers============================
+    Route::group(['namespace' => 'academic_year'], function () {
+        Route::resource('academic_year', 'academic_yearController');
+    });

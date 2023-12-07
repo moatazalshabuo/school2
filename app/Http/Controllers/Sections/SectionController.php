@@ -42,7 +42,8 @@ class SectionController extends Controller
       $Sections->Class_id = $request->Class_id;
       $Sections->Status = 1;
       $Sections->save();
-      $Sections->teachers()->attach($request->teacher_id);
+      // علاقة المعلم مع القسم معلقة
+      // $Sections->teachers()->attach($request->teacher_id);
       toastr()->success(trans('messages.success'));
 
       return redirect()->route('Sections.index');

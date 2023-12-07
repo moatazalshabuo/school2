@@ -9,6 +9,7 @@ use App\Models\My_Parent;
 use App\Models\Nationalitie;
 use App\Models\Section;
 use App\Models\Student;
+use App\Models\academic_year;
 use App\Models\Type_Blood;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -67,6 +68,7 @@ class StudentRepository implements StudentRepositoryInterface{
        $data['Genders'] = Gender::all();
        $data['nationals'] = Nationalitie::all();
        $data['bloods'] = Type_Blood::all();
+       $data['academic_years'] = academic_year::all();
        return view('pages.Students.add',$data);
 
     }
@@ -110,7 +112,7 @@ class StudentRepository implements StudentRepositoryInterface{
             $students->Classroom_id = $request->Classroom_id;
             $students->section_id = $request->section_id;
             $students->parent_id = $request->parent_id;
-            $students->academic_year = $request->academic_year;
+            $students->academic_year_id = $request->academic_year_id;
             $students->save();
 
             // insert img

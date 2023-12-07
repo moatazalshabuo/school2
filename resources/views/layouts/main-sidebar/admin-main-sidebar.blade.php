@@ -10,7 +10,19 @@
         </li>
         <!-- menu title -->
         <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.Programname')}} </li>
-
+        
+<!-- Years-->
+<li>
+    <a href="javascript:void(0);" data-toggle="collapse" data-target="#Years-menu">
+        <div class="pull-left"><i class="fa fa-calendar-check-o"></i></i><span
+                class="right-nav-text">{{trans('main_trans.Years')}}</span></div>
+        <div class="pull-right"><i class="ti-plus"></i></div>
+        <div class="clearfix"></div>
+    </a>
+    <ul id="Years-menu" class="collapse" data-parent="#sidebarnav">
+        <li> <a href="{{route('academic_year.index')}}">{{trans('main_trans.list_Years')}}</a> </li>
+    </ul>
+</li>
         <!-- Grades-->
         <li>
             <a href="javascript:void(0);" data-toggle="collapse" data-target="#Grades-menu">
@@ -92,8 +104,7 @@
                 </li>
             </ul>
         </li>
-
-
+   
 
         <!-- Teachers-->
         <li>
