@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClassroom;
 use App\Models\Classroom;
 use App\Models\Grade;
+use App\Models\MainSubjects;
+use App\Models\SubjectClass;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -23,7 +26,6 @@ class ClassroomController extends Controller
         $My_Classes = Classroom::all();
         $Grades = Grade::all();
         return view('pages.My_Classes.My_Classes', compact('My_Classes', 'Grades'));
-
     }
 
     /**
@@ -33,7 +35,9 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-
+        $Grades = Grade::all();
+        $subjects = MainSubjects::all();
+        return view('pages.My_Classes.create', compact('Grades', 'subjects'));
     }
 
     /**
@@ -44,29 +48,42 @@ class ClassroomController extends Controller
     public function store(StoreClassroom $request)
     {
 
-        $List_Classes = $request->List_Classes;
+
+
 
         try {
 
-            $validated = $request->validated();
-            foreach ($List_Classes as $List_Class) {
-
-                $My_Classes = new Classroom();
-
-                $My_Classes->Name_Class = ['en' => $List_Class['Name_class_en'], 'ar' => $List_Class['Name']];
-
-                $My_Classes->Grade_id = $List_Class['Grade_id'];
-
-                $My_Classes->save();
-
+            foreach (Classroom::all() as $val) {
+                if ($val->Name_Class == $request->Name || $val->Name_Class == $request->Name_class_en) {
+                    if (app()->getLocale() == 'ar') {
+                        throw new ValidationException('اسم الصف موجود مسبقا');
+                    } else {
+                        throw new ValidationException('The name of the class already exists');
+                    }
+                }
             }
+            $validated = $request->validated();
+            $My_Classes = new Classroom();
+
+            $My_Classes->Name_Class = ['en' => $request->Name_class_en, 'ar' => $request->Name];
+            $My_Classes->Periods = $request->Periods;
+            $My_Classes->Grade_id = $request->Grade_id;
+            $My_Classes->save();
+
+            foreach ($request->subject_id as $val) {
+                SubjectClass::create([
+                    'main_subject_id' => $val,
+                    'class_room_id' => $My_Classes->id
+                ]);
+            }
+
+
 
             toastr()->success(trans('messages.success'));
             return redirect()->route('Classrooms.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-
     }
 
 
@@ -84,7 +101,6 @@ class ClassroomController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**
@@ -95,7 +111,6 @@ class ClassroomController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -118,14 +133,9 @@ class ClassroomController extends Controller
             ]);
             toastr()->success(trans('messages.Update'));
             return redirect()->route('Classrooms.index');
-        }
-
-        catch
-        (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-
-
     }
 
     /**
@@ -140,7 +150,6 @@ class ClassroomController extends Controller
         $Classrooms = Classroom::findOrFail($request->id)->delete();
         toastr()->error(trans('messages.Delete'));
         return redirect()->route('Classrooms.index');
-
     }
 
 
@@ -157,12 +166,7 @@ class ClassroomController extends Controller
     public function Filter_Classes(Request $request)
     {
         $Grades = Grade::all();
-        $Search = Classroom::select('*')->where('Grade_id','=',$request->Grade_id)->get();
-        return view('pages.My_Classes.My_Classes',compact('Grades'))->withDetails($Search);
-
+        $Search = Classroom::select('*')->where('Grade_id', '=', $request->Grade_id)->get();
+        return view('pages.My_Classes.My_Classes', compact('Grades'))->withDetails($Search);
     }
-
-
 }
-
-?>

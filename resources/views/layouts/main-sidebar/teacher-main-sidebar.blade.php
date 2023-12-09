@@ -12,6 +12,11 @@
         <!-- menu title -->
         <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.Programname')}} </li>
 
+        <li>
+            <a href="{{route('teacher.my_courses')}}"><i class="fas fa-chalkboard"></i><span
+                    class="right-nav-text">موادي</span></a>
+        </li>
+        
         <!-- الاقسام-->
         <li>
             <a href="{{route('sections')}}"><i class="fas fa-chalkboard"></i><span

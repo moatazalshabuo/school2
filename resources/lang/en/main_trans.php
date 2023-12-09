@@ -35,7 +35,8 @@ return [
     'Copyright' => 'Copyright',
     'Name_Programer' => 'SamirGamal MoraSoft All Rights Reserved',
     'Years'=>'Years',
-    'list_Years'=>'list_Years'
+    'list_Years'=>'list_Years',
+    'Subject_of_Teacher'=>'Subject of Teacher',
 
 
 ];

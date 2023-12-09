@@ -23,4 +23,6 @@ return [
     'Delete'=>'حذف',
     'delete_Class_Error'=>'لا يمكن حذف الصف لانه يحتوي علي اقسام',
     'Close' => 'اغلاق',
+    "Subject_of_class"=>"مواد الصف",
+    'Periods'=>'فترات الصف'
 ];

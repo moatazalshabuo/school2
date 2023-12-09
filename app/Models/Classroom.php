@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
 class Classroom extends Model
@@ -14,7 +15,7 @@ class Classroom extends Model
 
     protected $table = 'Classrooms';
     public $timestamps = true;
-    protected $fillable=['Name_Class','Grade_id'];
+    protected $fillable=['Name_Class','Grade_id','Periods'];
 
 
     // علاقة بين الصفوف المراحل الدراسية لجلب اسم المرحلة في جدول الصفوف
@@ -24,4 +25,7 @@ class Classroom extends Model
         return $this->belongsTo('App\Models\Grade', 'Grade_id');
     }
 
+    public function subject(){
+        return $this->hasMany(SubjectClass::class,'class_room_id');
+    }
 }

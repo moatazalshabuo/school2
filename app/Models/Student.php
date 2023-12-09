@@ -14,7 +14,7 @@ class Student extends Authenticatable
     use HasTranslations;
     public $translatable = ['name'];
     protected $guarded =[];
-
+    protected $fillable = ['id', 'name', 'email', 'password', 'gender_id', 'nationalitie_id', 'blood_id', 'Date_Birth', 'Grade_id', 'Classroom_id', 'section_id', 'parent_id', 'academic_year', 'deleted_at', 'created_at', 'updated_at', 'QRCode'];
     // علاقة بين الطلاب والانواع لجلب اسم النوع في جدول الطلاب
 
     public function gender()

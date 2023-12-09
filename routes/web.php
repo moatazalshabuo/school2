@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,20 +24,18 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('/login/{type}', 'LoginController@loginForm')->middleware('guest')->name('login.show');
     Route::post('/login', 'LoginController@login')->name('login');
     Route::get('/logout/{type}', 'LoginController@logout')->name('logout');
-
-
 });
 //==============================Translate all pages============================
 
 Route::group([
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
-    ], function () {
-        
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
+], function () {
+
     //==============================dashboard============================
-        
+
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-    
+
     //==============================dashboard============================
 
     Route::group(['namespace' => 'Grades'], function () {
@@ -44,7 +43,7 @@ Route::group([
     });
 
     //==============================Classrooms============================
-        
+
     Route::group(['namespace' => 'Classrooms'], function () {
         Route::resource('Classrooms', 'ClassroomController');
         Route::post('delete_all', 'ClassroomController@delete_all')->name('delete_all');
@@ -69,7 +68,7 @@ Route::group([
     });
 
     //==============================Students============================
-    
+
     Route::group(['namespace' => 'Students'], function () {
         Route::resource('Students', 'StudentController');
         Route::resource('online_classes', 'OnlineClasseController');
@@ -91,28 +90,42 @@ Route::group([
     });
 
     //==============================subjects============================
-    
+
     Route::group(['namespace' => 'Subjects'], function () {
         Route::resource('subjects', 'SubjectController');
     });
 
+    // =================================================================
+
+    Route::resource('subject', 'MainSubjectsController');
+
     //==============================Quizzes============================
-    
+
     Route::group(['namespace' => 'Quizzes'], function () {
         Route::resource('Quizzes', 'QuizzController');
     });
 
     //==============================questions============================
-    
+
     Route::group(['namespace' => 'questions'], function () {
         Route::resource('questions', 'QuestionController');
     });
 
     //==============================Setting============================
+
     Route::resource('settings', 'SettingController');
 
-      //==============================acadmicYaers============================
+    //==============================acadmicYaers============================
+
     Route::group(['namespace' => 'academic_year'], function () {
         Route::resource('academic_year', 'academic_yearController');
+    });
+
+
+    //==========================================================================
+    Route::controller(TeacherClassController::class)->group(function () {
+        Route::get('teacher-subject', 'index')->name('teacher_class.index');
+        Route::get('teacher-class/create', 'create')->name('teacher_class.create');
+        Route::post('teacher-class/store','store')->name('teacher_class.store');
     });
 });

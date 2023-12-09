@@ -13,5 +13,8 @@ return [
     'Gender'=>'النوع',
     'Joining_Date'=>'تاريخ التعين',
     'Address'=>'العنوان',
-
+    'Class'=>'الفصل',
+    'Subject'=>"المادة",
+    'Academy_year'=>'العام الدراسي',
+    'Add_Subject_Teacher'=>'تخصيص ماده لمعلم',
 ];

@@ -43,7 +43,7 @@
                                         @foreach($students as $student)
                                             <tr>
                                             <td>{{ $loop->index+1 }}</td>
-                                            <td>{{$student->name}}</td>
+                                            <td>{{$student->name}} <img src="data:image/png;base64,{{$student->QRCode}}" width="50" alt="QR Code"></td>
                                             <td>{{$student->email}}</td>
                                             <td>{{$student->gender->Name}}</td>
                                             <td>{{$student->grade->Name}}</td>

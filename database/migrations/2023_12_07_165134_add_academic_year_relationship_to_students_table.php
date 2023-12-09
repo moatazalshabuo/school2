@@ -10,7 +10,7 @@ class AddAcademicYearRelationshipToStudentsTable extends Migration
     {
         Schema::table('students', function (Blueprint $table) {
             $table->unsignedBigInteger('academic_year_id')->nullable();
-            $table->foreign('academic_year_id')->references('id')->on('academic_years')->onDelete('cascade');
+            $table->foreign('academic_year_id')->references('id')->on('academic_years')->onDelete('set null');
         });
     }
 

@@ -44,6 +44,8 @@
                                     </div>
                                 </div>
                                 <br>
+<<<<<<< HEAD:resources/views/pages/MainSubject/create.blade.php
+=======
 
                                 <div class="form-row">
                                     <div class="form-group col">
@@ -72,6 +74,7 @@
                                         </select>
                                     </div> --}}
                                 </div>
+>>>>>>> aa00bf46bb3ac2fca0484e61300ef5e7081edfe1:resources/views/pages/Subjects/create.blade.php
                                 <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">حفظ البيانات</button>
                             </form>
                         </div>

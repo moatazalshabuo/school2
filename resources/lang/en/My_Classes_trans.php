@@ -22,7 +22,6 @@ return [
     'Delete'=>'Delete',
     'delete_Class_Error'=>'The Class cannot be Deleted because it contains Sections',
     'Close' => 'Close',
-
-
-
+    "Subject_of_class"=>"Subject of class",
+    'Periods'=>'Periods of class'
 ];
