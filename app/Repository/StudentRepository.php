@@ -11,6 +11,7 @@ use App\Models\Section;
 use App\Models\Student;
 use App\Models\academic_year;
 use App\Models\Type_Blood;
+use App\Models\Religion;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -69,6 +70,7 @@ class StudentRepository implements StudentRepositoryInterface{
        $data['nationals'] = Nationalitie::all();
        $data['bloods'] = Type_Blood::all();
        $data['academic_years'] = academic_year::all();
+       $data['Religions'] = Religion::all();
        return view('pages.Students.add',$data);
 
     }
@@ -95,11 +97,39 @@ class StudentRepository implements StudentRepositoryInterface{
     }
 
     public function Store_Student($request){
-
-
+// var_dump($request);
+// die();
         DB::beginTransaction();
-
         try {
+            // حفظ بيانات الوالدين أولاً
+            $parent = new My_Parent();
+            $parent->email = $request->email_p;
+            $parent->password = Hash::make($request->password_p);
+            $parent->Name_Father = ['en' => $request->Name_Father_en, 'ar' => $request->Name_Father];
+            $parent->National_ID_Father = $request->National_ID_Father;
+            
+            $parent->Passport_ID_Father = $request->Passport_ID_Father;
+            $parent->Phone_Father = $request->Phone_Father;
+            $parent->Job_Father = ['en' => $request->Job_Father_en, 'ar' => $request->Job_Father];
+            $parent->Passport_ID_Father = $request->Passport_ID_Father;
+            $parent->Nationality_Father_id = $request->Nationality_Father_id;
+            $parent->Blood_Type_Father_id = $request->Blood_Type_Father_id;
+            $parent->Religion_Father_id = $request->Religion_Father_id;
+            $parent->Address_Father = $request->Address_Father;
+    
+            $parent->Name_Mother = ['en' => $request->Name_Mother_en, 'ar' => $request->Name_Mother];
+            $parent->National_ID_Mother = $request->National_ID_Mother;
+            $parent->Passport_ID_Mother = $request->Passport_ID_Mother;
+            $parent->Phone_Mother = $request->Phone_Mother;
+            $parent->Job_Mother = ['en' => $request->Job_Mother_en, 'ar' => $request->Job_Mother];
+            $parent->Passport_ID_Mother = $request->Passport_ID_Mother;
+            $parent->Nationality_Mother_id = $request->Nationality_Mother_id;
+            $parent->Blood_Type_Mother_id = $request->Blood_Type_Mother_id;
+            $parent->Religion_Mother_id = $request->Religion_Mother_id;
+            $parent->Address_Mother = $request->Address_Mother;
+            $parent->save();
+
+
             $students = new Student();
             $students->name = ['en' => $request->name_en, 'ar' => $request->name_ar];
             $students->email = $request->email;
@@ -111,7 +141,7 @@ class StudentRepository implements StudentRepositoryInterface{
             $students->Grade_id = $request->Grade_id;
             $students->Classroom_id = $request->Classroom_id;
             $students->section_id = $request->section_id;
-            $students->parent_id = $request->parent_id;
+            $students->parent_id = $parent->id;
             $students->academic_year_id = $request->academic_year_id;
             $students->save();
 
