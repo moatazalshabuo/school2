@@ -23,10 +23,10 @@ class Section extends Model
     }
 
     // علاقة الاقسام مع المعلمين
-    // public function teachers()
-    // {
-    //     return $this->belongsToMany('App\Models\Teacher','teacher_section');
-    // }
+    public function teachers()
+    {
+        return $this->belongsToMany('App\Models\Teacher','teacher_section');
+    }
 
     public function Grades()
     {

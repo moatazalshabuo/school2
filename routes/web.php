@@ -97,7 +97,6 @@ Route::group([
 
     // =================================================================
 
-
     Route::resource('subject', 'MainSubjectsController');
 
     //==============================Quizzes============================
@@ -113,12 +112,20 @@ Route::group([
     });
 
     //==============================Setting============================
+
     Route::resource('settings', 'SettingController');
-    
-});
 
+    //==============================acadmicYaers============================
 
-      //==============================acadmicYaers============================
     Route::group(['namespace' => 'academic_year'], function () {
         Route::resource('academic_year', 'academic_yearController');
     });
+
+
+    //==========================================================================
+    Route::controller(TeacherClassController::class)->group(function () {
+        Route::get('teacher-subject', 'index')->name('teacher_class.index');
+        Route::get('teacher-class/create', 'create')->name('teacher_class.create');
+        Route::post('teacher-class/store','store')->name('teacher_class.store');
+    });
+});

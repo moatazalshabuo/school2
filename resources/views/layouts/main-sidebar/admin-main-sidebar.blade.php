@@ -116,6 +116,7 @@
             </a>
             <ul id="Teachers-menu" class="collapse" data-parent="#sidebarnav">
                 <li> <a href="{{route('Teachers.index')}}">{{trans('main_trans.List_Teachers')}}</a> </li>
+                <li> <a href="{{route('teacher_class.index')}}">{{trans('main_trans.Subject_of_Teacher')}}</a> </li>
             </ul>
         </li>
 

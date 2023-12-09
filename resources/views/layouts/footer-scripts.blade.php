@@ -43,6 +43,9 @@
 
 
 <script>
+    $(function(){
+        $('.select2').select2()
+    })
     function CheckAll(className, elem) {
         var elements = document.getElementsByClassName(className);
         var l = elements.length;
@@ -115,11 +118,6 @@
         });
     });
 </script>
-
-
-
-
-
 <script>
     $(document).ready(function() {
         $('select[name="Grade_id_new"]').on('change', function() {

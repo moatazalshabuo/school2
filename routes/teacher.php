@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeacherClassController;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -54,8 +55,8 @@ Route::group(
      Route::post('profile/{id}', 'ProfileController@update')->name('profile.update');
      Route::get('student_quizze/{id}','QuizzController@student_quizze')->name('student.quizze');
      Route::post('repeat_quizze', 'QuizzController@repeat_quizze')->name('repeat.quizze');
-
-
+     
     });
-
+    Route::get('My-courses','TeacherClassController@my_courses')->name('teacher.my_courses');
+   
 });

@@ -15,7 +15,7 @@ class Classroom extends Model
 
     protected $table = 'Classrooms';
     public $timestamps = true;
-    protected $fillable=['Name_Class','Grade_id'];
+    protected $fillable=['Name_Class','Grade_id','Periods'];
 
 
     // علاقة بين الصفوف المراحل الدراسية لجلب اسم المرحلة في جدول الصفوف

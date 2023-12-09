@@ -27,7 +27,7 @@ class academic_yearController extends Controller
     try {
         $validated = $request->validated();
         $academicYear = new academic_year();
-        $academicYear->academic_year = $request->academic_year;
+        $academicYear->academic_year = ['en' => $request->Name_en, 'ar' => $request->Name_ar];
         $academicYear->start_date = $request->start_date;
         $academicYear->end_date = $request->end_date;
         $academicYear->status = $request->status;

@@ -791,10 +791,8 @@ NOTE: This file contains all scripts for the actual Template.
       $('.repeater, .repeater-file, .repeater-add').repeater({
         show: function () {
           $(this).slideDown();
-          $(this).find('select').niceSelect();
           $('.select2-container').remove();
-          $('#subject_id').select2({
-            placeholder: "Placeholder text",
+          $('select').select2({
             allowClear: true
           });
           $('.select2-container').css('width', '100%');

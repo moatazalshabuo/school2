@@ -53,20 +53,20 @@ class ClassroomController extends Controller
 
         try {
 
-            foreach(Classroom::all() as $val){
-                if($val->Name_Class == $request->Name || $val->Name_Class == $request->Name_class_en){
-                    if(app()->getLocale() == 'ar'){
+            foreach (Classroom::all() as $val) {
+                if ($val->Name_Class == $request->Name || $val->Name_Class == $request->Name_class_en) {
+                    if (app()->getLocale() == 'ar') {
                         throw new ValidationException('اسم الصف موجود مسبقا');
-                    }else{
+                    } else {
                         throw new ValidationException('The name of the class already exists');
-                    }  
+                    }
                 }
             }
             $validated = $request->validated();
             $My_Classes = new Classroom();
 
             $My_Classes->Name_Class = ['en' => $request->Name_class_en, 'ar' => $request->Name];
-
+            $My_Classes->Periods = $request->Periods;
             $My_Classes->Grade_id = $request->Grade_id;
             $My_Classes->save();
 

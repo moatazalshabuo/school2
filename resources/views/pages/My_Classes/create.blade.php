@@ -76,6 +76,12 @@
                             </div>
 
                         </div>
+                        <div class="col-6">
+                            <label for="Name" class="mr-sm-2">{{ trans('My_Classes_trans.Periods') }}
+                                :</label>
+                            <input class="form-control" type="number" name="Periods"
+                                value="{{ old('Periods') }}" />
+                        </div>
 
 
                     </div>

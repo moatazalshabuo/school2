@@ -58,7 +58,7 @@
 
 
                 <div class="table-responsive">
-                    <table id="datatable" class="table  table-hover table-sm table-bordered p-0 dtr-inline collapsed" data-page-length="50"
+                    <table id="datatable" class="table  table-hover table-sm table-bordered p-0 " data-page-length="50"
                         style="text-align: center">
                         <thead>
                             <tr>
@@ -68,6 +68,7 @@
                                 <th>{{ trans('My_Classes_trans.Name_class') }}</th>
                                 <th>{{ trans('My_Classes_trans.Name_Grade') }}</th>
                                 <th>{{ trans('My_Classes_trans.Processes') }}</th>
+                                <th>{{ trans('My_Classes_trans.Periods') }}</th>
                                 <th>{{ trans('My_Classes_trans.Subject_of_class') }}</th>
                             </tr>
                         </thead>
@@ -92,6 +93,9 @@
                                         @foreach ($My_Class->subject as $item)
                                              {{ $item->main_subject->name }}, 
                                         @endforeach
+                                    </td>
+                                    <td>
+                                        {{ $My_Class->Periods }}
                                     </td>
                                     <td>
                                         {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal"

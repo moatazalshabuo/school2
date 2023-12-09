@@ -30,5 +30,8 @@ class Teacher extends  Authenticatable
         return $this->belongsToMany('App\Models\Section','teacher_section');
     }
 
+    public function TeachClassSubject(){
+        return $this->hasMany(TecherClass::class,'tech_id');
+    }
 
 }

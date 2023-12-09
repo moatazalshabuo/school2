@@ -170,7 +170,7 @@
                                     <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
                                     @foreach ($academic_years as $academic_year)
                                         {{-- <option value="{{ $academic_year->id }}">{{ $academic_year->start_date; $academic_year->start_date; }}</option> --}}
-                                        <option value="{{ $academic_year->id }}">{{ \Carbon\Carbon::parse($academic_year->start_date)->format('Y') }}</option>
+                                        <option value="{{ $academic_year->id }}">{{ $academic_year->academic_year }}</option>
 
                                         @endforeach
                                 </select>

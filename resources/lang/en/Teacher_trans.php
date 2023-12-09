@@ -13,4 +13,8 @@ return [
     'Gender'=>'Gender',
     'Joining_Date'=>'Joining_Date',
     'Address'=>'Address',
+    'Class'=>'Class',
+    'Subject'=>"Subject",
+    'Academy_year'=>'Academy Year',
+    'Add_Subject_Teacher'=>'Add Subject To Teacher',
 ];
