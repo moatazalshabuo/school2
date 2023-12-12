@@ -249,7 +249,6 @@ class AddParent extends Component
         $this->Blood_Type_Father_id = '';
         $this->Address_Father ='';
         $this->Religion_Father_id ='';
-
         $this->Name_Mother = '';
         $this->Job_Mother = '';
         $this->Job_Mother_en = '';

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTeachers;
 use App\Models\Gender;
 use App\Models\Specialization;
 use App\Models\Teacher;
+use App\Models\student_grades;
 use Illuminate\Http\Request;
 use App\Repository\TeacherRepositoryInterface;
 
@@ -69,4 +70,7 @@ class TeacherController extends Controller
     {
         return $this->Teacher->DeleteTeachers($request);
     }
+
+
+    
 }

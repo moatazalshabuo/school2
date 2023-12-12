@@ -28,10 +28,10 @@ class Subject extends Model
     }
 
     // جلب اسم المعلم
-    // public function teacher()
-    // {
-    //     return $this->belongsTo('App\Models\Teacher', 'teacher_id');
-    // }
+    public function teacher()
+    {
+        return $this->belongsTo('App\Models\Teacher', 'teacher_id');
+    }
 
 
 }
