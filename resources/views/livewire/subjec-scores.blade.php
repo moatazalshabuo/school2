@@ -1,44 +1,49 @@
 <div class="col-md-12 mb-30">
+
     <div class="card card-statistics h-100">
         <div class="card-body">
             <form method="post" action="{{ url('/subject-scores') }}">
                 @csrf
                 <div class="row">
                     <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="grade_id">{{ trans('Grade') }} : <span class="text-danger">*</span></label>
-                                    <select class="custom-select mr-sm-2" name="grade_id">
-                                        <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
-                                        @foreach ($grades as $grade)
-                                            <option value="{{ $grade->id }}">{{ $grade->Name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="grade_id">{{ trans('Grade') }} : <span class="text-danger">*</span></label>
+                            <select class="custom-select mr-sm-2" wire:model='select_grades' wire:change="change_grades"
+                                name="grade_id">
+                                <option selected value="">{{ trans('Parent_trans.Choose') }}...</option>
+                                @foreach ($grades as $grade)
+                                    <option value="{{ $grade->id }}">{{ $grade->Name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="stage_id">{{ trans('Stage') }} : <span class="text-danger">*</span></label>
-                                    <select class="custom-select mr-sm-2" name="stage_id">
-                                        <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
-                                        @foreach ($stages as $stage)
-                                            <option value="{{ $stage->id }}">{{ $stage->Name_Class	 }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                    {{-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="section_id">{{ trans('Section') }} : <span class="text-danger">*</span></label>
-                                    <select class="custom-select mr-sm-2" name="section_id">
-                                        <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
-                                        @foreach ($sections as $section)
-                                            <option value="{{ $section->id }}">{{ $section->Name_Section }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
+                        <div class="form-group">
+                            <label for="stage_id">{{ trans('Stage') }} : <span class="text-danger">*</span></label>
+                            <select class="custom-select mr-sm-2" wire:model="select_stage" wire:change="change_stage"
+                                name="stage_id">
+                                <option selected value="">{{ trans('Parent_trans.Choose') }}...</option>
+                                @foreach ($stages as $stage)
+                                    <option value="{{ $stage->id }}">{{ $stage->Name_Class }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="section_id">{{ trans('Section') }} : <span class="text-danger">*</span></label>
+                            <select class="custom-select mr-sm-2" wire:model="select_section" wire:change="submitFirst"
+                                name="section_id">
+                                <option selected value="">{{ trans('Parent_trans.Choose') }}...</option>
+                                @foreach ($sections as $section)
+                                    <option value="{{ $section->id }}">{{ $section->Name_Section }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
-                    <div class="col-md-3">
+
+                    {{-- <div class="col-md-3">
                         <div class="form-group">
                             <label for="student_id">{{ trans('Student') }} : <span class="text-danger">*</span></label>
                             <select class="custom-select mr-sm-2" name="student_id">
@@ -48,8 +53,8 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="col-md-3">
+                    </div> --}}
+                    {{-- <div class="col-md-3">
                         <div class="form-group">
                             <label for="subject_id">{{ trans('Subject') }} : <span class="text-danger">*</span></label>
                             <select class="custom-select mr-sm-2" name="subject_id" wire:change="">
@@ -59,16 +64,17 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="col-md-3">
+                    </div> --}}
+                    {{-- <div class="col-md-3">
                         <div class="form-group">
                             <label>{{ trans('Score') }} :</label>
                             <input class="form-control" type="number" name="score">
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
-                <button class="btn btn-success btn-sm nextBtn btn-lg pull-left" type="submit">Submit</button>
+                {{-- <button class="btn btn-success btn-sm nextBtn btn-lg pull-left" type="submit">Submit</button> --}}
             </form>
+
             <!-- جدول العرض -->
             <div class="mt-4">
                 <h3>{{ trans('Displayed Scores') }}</h3>
@@ -85,74 +91,59 @@
                         @php
                             $previousStudentId = null;
                         @endphp
-
-                        {{-- 
-                            @forelse ($displayedScores as $index => $displayedScore)
-                                @if ($displayedScore->student_id != $previousStudentId)
-                                    <tr class="student-row">
-                                        <td>{{ $displayedScore->student->name }}</td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                @endif
-                                <tr>
-                                    <td></td>
-                                    <td>{{ $displayedScore->subject->name }}</td>
-                                    <td>{{ $displayedScore->score }}</td>
-                                    <td>
-                                        <a href="{{ route('subject-scores.edit', $displayedScore->id) }}"
-                                            class="btn btn-primary">Edit</a>
-                                        <form action="{{ route('subject-scores.destroy', $displayedScore->id) }}"
-                                            method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure?')">Delete</button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-
-                                @php $previousStudentId = $displayedScore->student_id; @endphp
-
-                                @if ($loop->last)
-                                    </tr>
-                                @endif
-                            @empty
-                                <tr>
-                                    <td colspan="3">No scores to display</td>
-                                </tr>
-                            @endforelse --}}
-
-                        @foreach ($students as $item)
+                        @foreach ($students as $key1 => $item)
                             <tr class="student-row">
                                 <td>{{ $item->name }}</td>
                                 <td colspan="2"></td>
                             </tr>
-                            @foreach ($item->subject_score as $val)
+                            @php
+
+                            @endphp
+                            @foreach ($item->subject_score as $key2 => $val)
                                 <tr>
                                     <td></td>
-                                    <td>{{ $val->subject->name }}</td>
-                                    <td>{{ $val->score }}</td>
+                                    <td>{{ $val->subject->main_subject->name }}</td>
                                     <td>
-                                        <a href="{{ route('subject-scores.edit', $val->id) }}"
-                                            class="btn btn-primary">Edit</a>
-                                        <form action="{{ route('subject-scores.destroy', $val->id) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure?')">Delete</button>
-                                        </form>
+                                        <input type='number'
+                                            wire:model='students.{{ $key1 }}.subject_score.{{ $key2 }}.score'
+                                            value="{{ $val->score }}" class="form-control">
                                     </td>
-
                                 </tr>
                             @endforeach
+                            <tr>
+
+                                <td colspan="3">
+                                    @if ($check_score[$key1])
+                                        <div class="alert alert-success" id="success-alert">
+                                            <button type="button" class="close" data-dismiss="alert">x</button>
+                                            {{ trans('messages.success') }}
+                                        </div>
+                                    @endif
+                                </td>
+                                <td class="text-left">
+                                    <button wire:click="saveScore({{ $key1 }})" class="btn btn-primary"><i
+                                            class="fa fa-check"></i> حفظ الطالب</button>
+                                </td>
+                            </tr>
                         @endforeach
+                        @php
+
+                        @endphp
                     </tbody>
-
                 </table>
+                @if (!empty($students))
+                    <div>
+                        @if (!empty($successMessage))
+                            <div class="alert alert-success" id="success-alert">
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                {{ $successMessage }}
+                            </div>
+                        @endif
+                        <button wire:click="saveall" class="btn btn-success"><i class="fa fa-check"></i> حفظ
+                            الكل</button>
+                    </div>
+                @endif
             </div>
-
             <!-- Add this modal structure to your HTML file -->
             <div class="modal" tabindex="-1" role="dialog" id="confirmDeleteModal">
                 <div class="modal-dialog" role="document">

@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Http\Livewire\SubjecScores;
 use App\Models\Student;
+use App\Models\SubjectClass;
 use App\Observers\StudentsObserver;
+use App\Observers\SubjectScoreObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Student::observe(StudentsObserver::class);
+        // SubjectClass::observe(SubjectScoreObserver::class);
     }
 }

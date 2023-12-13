@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubjectScore extends Model
 {
     protected $table = 'subject_scores';
-    protected $fillable = ['score'];
+    protected $fillable = ['score','student_id','subject_id'];
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
@@ -15,6 +15,6 @@ class SubjectScore extends Model
 
     public function subject()
     {
-        return $this->belongsTo(MainSubjects::class, 'subject_id');
+        return $this->belongsTo(SubjectClass::class, 'subject_id');
     }
 }

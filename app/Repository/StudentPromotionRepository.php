@@ -69,7 +69,7 @@ class StudentPromotionRepository implements StudentPromotionRepositoryInterface
                         'Grade_id' => $request->Grade_id_new,
                         'Classroom_id' => $request->Classroom_id_new,
                         'section_id' => $request->section_id_new,
-                        'academic_year' => $request->academic_year_new,
+                        'academic_year_id' => $request->academic_year_new,
                     ]);
     
                 Promotion::updateOrCreate([
@@ -128,7 +128,7 @@ class StudentPromotionRepository implements StudentPromotionRepositoryInterface
                  'Grade_id'=>$Promotion->from_grade,
                  'Classroom_id'=>$Promotion->from_Classroom,
                  'section_id'=> $Promotion->from_section,
-                 'academic_year'=>$Promotion->academic_year,
+                 'academic_year_id'=>$Promotion->academic_year,
                ]);
 
                  //حذف جدول الترقيات
@@ -149,7 +149,7 @@ class StudentPromotionRepository implements StudentPromotionRepositoryInterface
                         'Grade_id'=>$Promotion->from_grade,
                         'Classroom_id'=>$Promotion->from_Classroom,
                         'section_id'=> $Promotion->from_section,
-                        'academic_year'=>$Promotion->academic_year,
+                        'academic_year_id'=>$Promotion->academic_year,
                     ]);
 
 

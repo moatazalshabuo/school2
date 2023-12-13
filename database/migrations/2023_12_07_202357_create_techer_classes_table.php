@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tech_id')->constrained('teachers')->cascadeOnDelete();
             $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
-            $table->foreignId('subjec_class_id')->constrained('subjec_class')->cascadeOnDelete();
-            $table->foreignId('academic_year_id')->constrained('academic_year')->cascadeOnDelete();
+            $table->foreignId('subject_class_id')->constrained('subject_class')->cascadeOnDelete();
+            $table->foreignId('academic_year_id')->constrained('academic_years')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -42,7 +42,7 @@ class TeacherClassController extends Controller
             TecherClass::create([
                 'tech_id'=>$val['teacher'], 
                 'section_id'=>$val['class'], 
-                'subjec_class_id'=>$val['subject'], 
+                'subject_class_id'=>$val['subject'], 
                 'academic_year_id'=>$val['academy']
             ]);
         }

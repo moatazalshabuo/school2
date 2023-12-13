@@ -20,8 +20,8 @@ return new class extends Migration
             $table->double('score');
             $table->timestamps();
 
-            $table->foreign('student_id')->references('id')->on('students');
-            $table->foreign('subject_id')->references('id')->on('main_subjects');
+            $table->foreign('student_id')->references('id')->on('students')->cascadeOnDelete();
+            $table->foreign('subject_id')->references('id')->on('subject_class')->cascadeOnDelete();
         });
     }
 

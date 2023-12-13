@@ -11,7 +11,7 @@ class TecherClass extends Model
     use HasFactory;
 
     protected $table = 'techer_classes';
-    protected $fillable = ['subjec_class_id','academic_year_id','tech_id', 'section_id', 'id', 'created_at'];
+    protected $fillable = ['subject_class_id','academic_year_id','tech_id', 'section_id', 'id', 'created_at'];
 
     public function Teacher()
     {
@@ -27,7 +27,7 @@ class TecherClass extends Model
     }
     public function subject()
     {
-        return $this->belongsTo(SubjectClass::class, "subjec_class_id");
+        return $this->belongsTo(SubjectClass::class, "subject_class_id");
     }
 }
 

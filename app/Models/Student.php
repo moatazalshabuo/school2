@@ -14,8 +14,12 @@ class Student extends Authenticatable
 
     use HasTranslations;
     public $translatable = ['name'];
-    protected $guarded =[];
-    protected $fillable = ['id', 'name', 'email', 'password', 'gender_id', 'nationalitie_id', 'blood_id', 'Date_Birth', 'Grade_id', 'Classroom_id', 'section_id', 'parent_id', 'academic_year', 'deleted_at', 'created_at', 'updated_at', 'QRCode'];
+    protected $guarded = [];
+    protected $fillable = [
+        'id', 'name', 'email', 'password', 'gender_id', 'nationalitie_id', 'blood_id',
+        'Date_Birth', 'Grade_id', 'Classroom_id', 'section_id', 'parent_id', 'academic_year_id',
+        'deleted_at', 'created_at', 'updated_at'
+    ];
     // علاقة بين الطلاب والانواع لجلب اسم النوع في جدول الطلاب
 
     public function gender()
@@ -73,7 +77,7 @@ class Student extends Authenticatable
         return $this->hasMany('App\Models\StudentAccount', 'student_id');
     }
 
-   // علاقة بين جدول الطلاب وجدول الحضور والغياب
+    // علاقة بين جدول الطلاب وجدول الحضور والغياب
     public function attendance()
     {
         return $this->hasMany('App\Models\Attendance', 'student_id');
@@ -81,11 +85,11 @@ class Student extends Authenticatable
 
     public function academicYear()
     {
-        return $this->belongsTo('App\Models\academic_year','academic_year_id ');
+        return $this->belongsTo('App\Models\academic_year', 'academic_year_id ');
     }
 
-    public function subject_score(){
+    public function subject_score()
+    {
         return $this->hasMany(SubjectScore::class);
     }
-
 }

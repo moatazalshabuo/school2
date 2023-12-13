@@ -17,7 +17,7 @@
         "laravel/framework": "^9.27",
         "laravel/tinker": "^2.5",
         "laravel/ui": "4.0",
-        "livewire/livewire": "^2.10",
+        "livewire/livewire": "^2.12",
         "macsidigital/laravel-zoom": "^5.0",
         "mcamara/laravel-localization": "^1.7",
         "simplesoftwareio/simple-qrcode": "^4.2",
@@ -50,6 +50,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/Helpers/helpers.php"
         ]
     },
     "autoload-dev": {

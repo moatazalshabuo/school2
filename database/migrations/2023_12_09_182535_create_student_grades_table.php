@@ -19,10 +19,10 @@ class CreateStudentGradesTable extends Migration
             $table->string('created_by');
             $table->timestamps();
 
-            $table->foreign('student_id')->references('id')->on('students');
-            $table->foreign('subject_class_id')->references('id')->on('subject_class');
-            $table->foreign('academic_year_id')->references('id')->on('academic_years');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('student_id')->references('id')->on('students')->cascadeOnDelete();
+            $table->foreign('subject_class_id')->references('id')->on('subject_class')->cascadeOnDelete();
+            $table->foreign('academic_year_id')->references('id')->on('academic_years')->cascadeOnDelete();
+            $table->foreign('teacher_id')->references('id')->on('teachers')->cascadeOnDelete();
             
         });
     }

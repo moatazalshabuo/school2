@@ -6,6 +6,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\SubjectScoreController;
 use App\Http\Controllers\TeacherClassController;
+// use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,5 +148,9 @@ Route::group([
 
 
         Route::get('teacher-detile/{id}', 'teacher_courses')->name('teacher_courses');
+    });
+
+    Route::get("test",function(){
+        return  QrCode::generate('1');
     });
 });

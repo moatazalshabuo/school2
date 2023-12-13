@@ -40,7 +40,7 @@
     <script src="{{ URL::asset('assets/js/bootstrap-datatables/ar/dataTables.bootstrap4.min.js') }}"></script>
 @endif
 
-
+@livewireScripts
 
 <script>
     $(function(){

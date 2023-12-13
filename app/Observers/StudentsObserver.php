@@ -2,10 +2,11 @@
 
 namespace App\Observers;
 
+
 use App\Models\Student;
-use Illuminate\Support\Facades\Storage;
-use Imagick;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\SubjectClass;
+use App\Models\SubjectScore;
+use Helper;
 
 class StudentsObserver
 {
@@ -17,6 +18,8 @@ class StudentsObserver
      */
     public function created(Student $student)
     {
+        
+        Helper::studentSubject($student);
       
     }
 
