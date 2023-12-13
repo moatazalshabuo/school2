@@ -50,4 +50,8 @@ class TeacherClassController extends Controller
     public function my_courses(){
         return view('pages.Teachers.dashboard.MyCourses');
     }
+    public function teacher_courses($id){
+        $Teacher = Teacher::find($id);
+        return view('pages.Teachers.Teacherditales',compact('Teacher'));
+    }
 }

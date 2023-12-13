@@ -42,7 +42,7 @@
                                             <tr>
                                                 <?php $i++; ?>
                                                 <td>{{ $i }}</td>
-                                                <td>{{ $Teacher->Teacher->Name }}</td>
+                                                <td><a href="{{ route('teacher_courses',$Teacher->Teacher->id) }}">{{ $Teacher->Teacher->Name }}</td>
                                                 {{-- <td>{{ $Teacher->Section->Name_Section }}</td>
                                                 <td>{{ $Teacher->subject->main_subject->name }}</td> --}}
                                                 <td>{{ $Teacher->year->academic_year }}</td>

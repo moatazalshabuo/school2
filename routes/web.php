@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use MacsiDigital\Zoom\Role;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -127,5 +128,6 @@ Route::group([
         Route::get('teacher-subject', 'index')->name('teacher_class.index');
         Route::get('teacher-class/create', 'create')->name('teacher_class.create');
         Route::post('teacher-class/store','store')->name('teacher_class.store');
+        Route::get('teacher-detile/{id}','teacher_courses')->name('teacher_courses');
     });
 });
