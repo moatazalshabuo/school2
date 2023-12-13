@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use MacsiDigital\Zoom\Role;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Controllers\SubjectScoreController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -128,6 +130,22 @@ Route::group([
         Route::get('teacher-subject', 'index')->name('teacher_class.index');
         Route::get('teacher-class/create', 'create')->name('teacher_class.create');
         Route::post('teacher-class/store','store')->name('teacher_class.store');
+        Route::get('teacher-class/{subjectClassId}/show','showGrades')->name('teacher_class.show');
+        // Route::get('teacher-class/{subjectClassId}/show'), [YourController::class, 'showTeacherClass'])->name('teacher_class.show');
+
+  
+    // Route::controller(SubjectScoreController::class)->group(function (){
+    //     Route::get('/subject-scores/create')->name('subject-scores.create')
+    // });
+    // Route::get('/subject-scores/create', [SubjectScoreController::class, 'create']);
+    // Route::post('/subject-scores', [SubjectScoreController::class, 'store']);
+    Route::resource('subject-scores', 'SubjectScoreController');
+
+    // Route::post('/subject-get', [SubjectScoreController::class, 'getSubjectsByClassroom']);
+    Route::get('/get-subjects-by-classroom/{classroomId}', [SubjectScoreController::class, 'getSubjectsByClassroom'])->name('subjects.by.classroom');
+    Route::get('/subject-scores/get-students', [SubjectScoreController::class, 'getStudents']);
+
+
         Route::get('teacher-detile/{id}','teacher_courses')->name('teacher_courses');
     });
 });

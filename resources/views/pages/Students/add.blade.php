@@ -151,19 +151,6 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="parent_id">{{ trans('Students_trans.parent') }} : <span
-                                        class="text-danger">*</span></label>
-                                <select class="custom-select mr-sm-2" name="parent_id">
-                                    <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
-                                    @foreach ($parents as $parent)
-                                        <option value="{{ $parent->id }}">{{ $parent->Name_Father }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
                                 <label for="academic_year">{{ trans('Students_trans.academic_year') }} : <span
                                         class="text-danger">*</span></label>
                                 <select class="custom-select mr-sm-2" name="academic_year_id">
@@ -176,6 +163,299 @@
                                 </select>
                             </div>
                         </div>
+                    </div><br>
+
+                        <h6 style="font-family: 'Cairo', sans-serif;color: blue">
+                            {{ trans('Students_trans.Student_information') }}</h6><br>
+{{-- ------------------------- --}}
+                        {{-- <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="parent_id">{{ trans('Students_trans.parent') }} : <span
+                                        class="text-danger">*</span></label>
+                                <select class="custom-select mr-sm-2" name="parent_id">
+                                    <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
+                                    @foreach ($parents as $parent)
+                                        <option value="{{ $parent->id }}">{{ $parent->Name_Father }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div> --}}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="parent_data">{{ trans('Students_trans.parent_data') }} : </label>
+                                    <input type="radio" id="show_parent_select" name="parent_option" value="select">
+                                    <label for="show_parent_select">{{ trans('Students_trans.show_select') }}</label>
+                                    <input type="radio" id="show_add_parent_form" name="parent_option" value="add">
+                                    <label for="show_add_parent_form">{{ trans('Students_trans.show_add_form') }}</label>
+                                </div>
+                            </div>
+                        
+                            {{-- عرض سيلكت --}}
+                            <div class="col-md-3" id="parent_select" style="display: none;">
+                                <div class="form-group">
+                                    <label for="parent_id">{{ trans('Students_trans.parent') }} : <span class="text-danger">*</span></label>
+                                    <select class="custom-select mr-sm-2" name="parent_id">
+                                        <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
+                                        @foreach ($parents as $parent)
+                                            <option value="{{ $parent->id }}">{{ $parent->Name_Father }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        
+                            {{-- عرض نموذج إضافة بيانات --}}
+<div class="col-xs-12" id="add_parent_form" style="display: none;">
+    <div class="col-xs-12">
+        <div class="col-md-12">
+            <br>
+            <div class="form-row">
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Email')}}</label>
+                    <input name="email_p" type="email"  class="form-control">
+                    @error('Email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Password')}}</label>
+                    <input type="password" name="password_p" class="form-control" >
+                    @error('Password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Name_Father')}}</label>
+                    <input type="text"name="Name_Father" class="form-control" >
+                    @error('Name_Father')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Name_Father_en')}}</label>
+                    <input type="text"name="Name_Father_en" class="form-control" >
+                    @error('Name_Father_en')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-3">
+                    <label for="title">{{trans('Parent_trans.Job_Father')}}</label>
+                    <input type="text"name="Job_Father" class="form-control">
+                    @error('Job_Father')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-md-3">
+                    <label for="title">{{trans('Parent_trans.Job_Father_en')}}</label>
+                    <input type="text"name="Job_Father_en" class="form-control">
+                    @error('Job_Father_en')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.National_ID_Father')}}</label>
+                    <input type="text"name="National_ID_Father" class="form-control">
+                    @error('National_ID_Father')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Passport_ID_Father')}}</label>
+                    <input type="text"name="Passport_ID_Father" class="form-control">
+                    @error('Passport_ID_Father')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Phone_Father')}}</label>
+                    <input type="text"name="Phone_Father" class="form-control">
+                    @error('Phone_Father')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">{{trans('Parent_trans.Nationality_Father_id')}}</label>
+                    <select class="custom-select my-1 mr-sm-2" name="Nationality_Father_id">
+                        <option selected>{{trans('Parent_trans.Choose')}}...</option>
+                        @foreach($nationals as $National)
+                            <option value="{{$National->id}}">{{$National->Name}}</option>
+                        @endforeach
+                    </select>
+                    @error('Nationality_Father_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group col">
+                    <label for="inputState">{{trans('Parent_trans.Blood_Type_Father_id')}}</label>
+                    <select class="custom-select my-1 mr-sm-2" name="Blood_Type_Father_id">
+                        <option selected>{{trans('Parent_trans.Choose')}}...</option>
+                        @foreach($bloods as $Type_Blood)
+                            <option value="{{$Type_Blood->id}}">{{$Type_Blood->Name}}</option>
+                        @endforeach
+                    </select>
+                    @error('Blood_Type_Father_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group col">
+                    <label for="inputZip">{{trans('Parent_trans.Religion_Father_id')}}</label>
+                    <select class="custom-select my-1 mr-sm-2" name="Religion_Father_id">
+                        <option selected>{{trans('Parent_trans.Choose')}}...</option>
+                        @foreach($Religions as $Religion)
+                            <option value="{{$Religion->id}}">{{$Religion->Name}}</option>
+                        @endforeach
+                    </select>
+                    @error('Religion_Father_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">{{trans('Parent_trans.Address_Father')}}</label>
+                <textarea class="form-control"name="Address_Father" id="exampleFormControlTextarea1" rows="4"></textarea>
+                @error('Address_Father')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            
+{{--  --}}
+    <div class="col-xs-12">
+        <div class="col-md-12">
+            <br>
+
+            <div class="form-row">
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Name_Mother')}}</label>
+                    <input type="text"name="Name_Mother" class="form-control">
+                    @error('Name_Mother')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Name_Mother_en')}}</label>
+                    <input type="text"name="Name_Mother_en" class="form-control">
+                    @error('Name_Mother_en')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-3">
+                    <label for="title">{{trans('Parent_trans.Job_Mother')}}</label>
+                    <input type="text"name="Job_Mother" class="form-control">
+                    @error('Job_Mother')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-md-3">
+                    <label for="title">{{trans('Parent_trans.Job_Mother_en')}}</label>
+                    <input type="text"name="Job_Mother_en" class="form-control">
+                    @error('Job_Mother_en')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.National_ID_Mother')}}</label>
+                    <input type="text"name="National_ID_Mother" class="form-control">
+                    @error('National_ID_Mother')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Passport_ID_Mother')}}</label>
+                    <input type="text"name="Passport_ID_Mother" class="form-control">
+                    @error('Passport_ID_Mother')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col">
+                    <label for="title">{{trans('Parent_trans.Phone_Mother')}}</label>
+                    <input type="text"name="Phone_Mother" class="form-control">
+                    @error('Phone_Mother')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">{{trans('Parent_trans.Nationality_Father_id')}}</label>
+                    <select class="custom-select my-1 mr-sm-2"name="Nationality_Mother_id">
+                        <option selected>{{trans('Parent_trans.Choose')}}...</option>
+                        @foreach($nationals as $National)
+                            <option value="{{$National->id}}">{{$National->Name}}</option>
+                        @endforeach
+                    </select>
+                    @error('Nationality_Mother_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group col">
+                    <label for="inputState">{{trans('Parent_trans.Blood_Type_Father_id')}}</label>
+                    <select class="custom-select my-1 mr-sm-2"name="Blood_Type_Mother_id">
+                        <option selected>{{trans('Parent_trans.Choose')}}...</option>
+                        @foreach($bloods as $Type_Blood)
+                            <option value="{{$Type_Blood->id}}">{{$Type_Blood->Name}}</option>
+                        @endforeach
+                    </select>
+                    @error('Blood_Type_Mother_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group col">
+                    <label for="inputZip">{{trans('Parent_trans.Religion_Father_id')}}</label>
+                    <select class="custom-select my-1 mr-sm-2"name="Religion_Mother_id">
+                        <option selected>{{trans('Parent_trans.Choose')}}...</option>
+                        @foreach($Religions as $Religion)
+                            <option value="{{$Religion->id}}">{{$Religion->Name}}</option>
+                        @endforeach
+                    </select>
+                    @error('Religion_Mother_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">{{trans('Parent_trans.Address_Mother')}}</label>
+                <textarea class="form-control"name="Address_Mother" id="exampleFormControlTextarea1"
+                          rows="4"></textarea>
+                @error('Address_Mother')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>
+                   
+
+                        </div>
+                        
+        </div>
+                        
+{{-- ----------------------- --}}
+                       
                     </div><br>
 
                     <div class="col-md-3">
@@ -196,10 +476,30 @@
         </div>
     </div>
 </div>
+</div>
 <!-- row closed -->
 @endsection
 @section('js')
 @toastr_js
 @toastr_render
+<script>
+    // تحديث العرض عند تغيير اختيار المستخدم
+    const showParentSelect = document.getElementById('show_parent_select');
+    const showAddParentForm = document.getElementById('show_add_parent_form');
+    const parentSelect = document.getElementById('parent_select');
+    const addParentForm = document.getElementById('add_parent_form');
 
+    // استمع لتغييرات اختيار المستخدم
+    document.querySelectorAll('input[name="parent_option"]').forEach((radio) => {
+        radio.addEventListener('change', function () {
+            if (showParentSelect.checked) {
+                parentSelect.style.display = 'block';
+                addParentForm.style.display = 'none';
+            } else if (showAddParentForm.checked) {
+                parentSelect.style.display = 'none';
+                addParentForm.style.display = 'block';
+            }
+        });
+    });
+</script>
 @endsection

@@ -57,7 +57,7 @@
                                                 <td>{{$promotion->f_classroom->Name_Class}}</td>
                                                 <td>{{$promotion->f_section->Name_Section}}</td>
                                                 <td>{{$promotion->t_grade->Name}}</td>
-                                                <td>{{$promotion->academic_year_new}}</td>
+                                                <td>{{$promotion->academic_year}}</td>
                                                 <td>{{$promotion->t_classroom->Name_Class}}</td>
                                                 <td>{{$promotion->t_section->Name_Section}}</td>
                                                 <td>

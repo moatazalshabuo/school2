@@ -88,7 +88,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <!-- add_form -->
+                             
                                             <form action="{{ route('Grades.update', 'test') }}" method="post">
                                                 {{ method_field('patch') }}
                                                 @csrf

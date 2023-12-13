@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Translatable\HasTranslations;
+use App\Models\SubjectScore;
 
 class Student extends Authenticatable
 {
@@ -81,6 +82,10 @@ class Student extends Authenticatable
     public function academicYear()
     {
         return $this->belongsTo('App\Models\academic_year','academic_year_id ');
+    }
+
+    public function subject_score(){
+        return $this->hasMany(SubjectScore::class);
     }
 
 }

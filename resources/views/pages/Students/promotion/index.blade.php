@@ -19,7 +19,11 @@
         <div class="col-md-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
-
+                    @if ($errors->has('error'))
+                    <div class="alert alert-danger">
+                        {{ $errors->first('error') }}
+                    </div>
+                @endif
                     @if (Session::has('error_promotions'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>{{Session::get('error_promotions')}}</strong>
@@ -61,17 +65,17 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="academic_year">{{trans('Students_trans.academic_year')}} : <span class="text-danger">*</span></label>
-                                    <select class="custom-select mr-sm-2" name="academic_year">
+                                    <select class="custom-select mr-sm-2" name="academic_year_id">
                                         <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
-                                        @php
-                                            $current_year = date("Y");
-                                        @endphp
-                                        @for($year=$current_year; $year<=$current_year +1 ;$year++)
-                                            <option value="{{ $year}}">{{ $year }}</option>
-                                        @endfor
+                                        @foreach ($academic_years as $academic_year)
+                                        {{-- <option value="{{ $academic_year->id }}">{{ $academic_year->start_date; $academic_year->start_date; }}</option> --}}
+                                        <option value="{{ $academic_year->id }}">{{ $academic_year->academic_year }}</option>
+        
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
+                           
 
 
 
@@ -107,12 +111,11 @@
                                     <label for="academic_year">{{trans('Students_trans.academic_year')}} : <span class="text-danger">*</span></label>
                                     <select class="custom-select mr-sm-2" name="academic_year_new">
                                         <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
-                                        @php
-                                            $current_year = date("Y");
-                                        @endphp
-                                        @for($year=$current_year; $year<=$current_year +1 ;$year++)
-                                            <option value="{{ $year}}">{{ $year }}</option>
-                                        @endfor
+                                        @foreach ($academic_years as $academic_year)
+                                        {{-- <option value="{{ $academic_year->id }}">{{ $academic_year->start_date; $academic_year->start_date; }}</option> --}}
+                                        <option value="{{ $academic_year->id }}">{{ $academic_year->academic_year }}</option>
+        
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
