@@ -6,6 +6,7 @@ use App\Models\academic_year;
 use App\Models\SubjectClass;
 use App\Models\Teacher;
 use App\Models\TecherClass;
+use App\Models\StudentGrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,9 @@ class TeacherClassController extends Controller
     public function index(){
 
         $year = academic_year::where('status',1)->get()[0]->id;
+        
         $Teachers = TecherClass::select('tech_id',DB::raw('min(academic_year_id) as academic_year_id'))->where('academic_year_id',$year)->groupBy('tech_id')->get();
+       
         return view('pages.Teachers.TeacherClass',compact('Teachers'));
     }
 
@@ -50,8 +53,19 @@ class TeacherClassController extends Controller
     public function my_courses(){
         return view('pages.Teachers.dashboard.MyCourses');
     }
+
     public function teacher_courses($id){
         $Teacher = Teacher::find($id);
         return view('pages.Teachers.Teacherditales',compact('Teacher'));
+
+    }
+    public function showGrades($subjectClassId)
+    {
+        $grades = StudentGrade::where('subject_class_id', $subjectClassId)
+            ->with(['student', 'subjectClass', 'academicYear', 'teacher'])
+            ->get();
+
+        return view('pages.show_grades', compact('grades'));
+
     }
 }
