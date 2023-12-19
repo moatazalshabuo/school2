@@ -20,6 +20,7 @@ class CreateFeesTable extends Migration
             $table->foreignId('Grade_id')->references('id')->on('Grades')->onDelete('cascade');
             $table->foreignId('Classroom_id')->references('id')->on('Classrooms')->onDelete('cascade');
             $table->string('description')->nullable();
+            $table->foreignId("year_id")->nullable()->constrained("academic_years")->cascadeOnDelete();
             $table->string('year');
             $table->integer('Fee_type');
             $table->timestamps();

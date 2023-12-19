@@ -21,7 +21,6 @@ class FeesInvoicesController extends Controller
     }
 
 
-
     public function store(Request $request)
     {
         return $this->Fees_Invoices->store($request);

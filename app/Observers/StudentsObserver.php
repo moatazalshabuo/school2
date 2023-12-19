@@ -2,7 +2,8 @@
 
 namespace App\Observers;
 
-
+use App\Models\Fee;
+use App\Models\FeeStudents;
 use App\Models\Student;
 use App\Models\SubjectClass;
 use App\Models\SubjectScore;
@@ -18,9 +19,16 @@ class StudentsObserver
      */
     public function created(Student $student)
     {
-        
         Helper::studentSubject($student);
-      
+        if ($student->academicYear->status == 1) {
+            $fee = Fee::where(['year_id' => $student->academicYear->id])->get()->first();
+            if ($fee)
+                FeeStudents::create([
+                    'St_id' => $student->id,
+                    'Fee_id' => $fee->id,
+                    'amount' => $fee->amount
+                ]);
+        }
     }
 
     /**

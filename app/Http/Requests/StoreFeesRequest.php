@@ -29,7 +29,7 @@ class StoreFeesRequest extends FormRequest
             'amount' => 'required|numeric',
             'Grade_id' => 'required|integer',
             'Classroom_id' => 'required|integer',
-            'year' => 'required',
+            'year_id' => 'required',
         ];
     }
 
@@ -43,7 +43,7 @@ class StoreFeesRequest extends FormRequest
             'amount.numeric' => trans('validation.numeric'),
             'Grade_id.required' => trans('validation.required'),
             'Classroom_id.required' => trans('validation.required'),
-            'year.required' => trans('validation.required'),
+            'year_id.required' => trans('validation.required'),
         ];
     }
 }

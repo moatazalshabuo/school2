@@ -51,7 +51,7 @@ class FeeInvoicesRepository implements FeeInvoicesRepositoryInterface
                 $Fees->Grade_id = $request->Grade_id;
                 $Fees->Classroom_id = $request->Classroom_id;;
                 $Fees->fee_id = $List_Fee['fee_id'];
-                $Fees->amount = $List_Fee['amount'];
+                $Fees->amount = $Fees->amount + $List_Fee['amount'];
                 $Fees->description = $List_Fee['description'];
                 $Fees->save();
 

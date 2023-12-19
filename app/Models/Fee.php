@@ -9,7 +9,7 @@ class Fee extends Model
 {
     use HasTranslations;
     public $translatable = ['title'];
-    protected $fillable=['title','amount','Grade_id','Classroom_id','year','description','Fee_type'];
+    protected $fillable = ['title', 'amount', 'Grade_id', 'Classroom_id', 'year_id', 'description', 'Fee_type'];
 
 
     // علاقة بين الرسوم الدراسية والمراحل الدراسية لجب اسم المرحلة
@@ -25,5 +25,10 @@ class Fee extends Model
     public function classroom()
     {
         return $this->belongsTo('App\Models\Classroom', 'Classroom_id');
+    }
+
+    public function year()
+    {
+        return $this->belongsTo(academic_year::class, 'year_id');
     }
 }

@@ -32,7 +32,7 @@
                         </div>
                         <div class="float-right text-right">
                             <p class="card-text text-dark">عدد الطلاب</p>
-                            <h4>50</h4>
+                            <h4>{{ Helper::countStudentInSection($item) }}</h4>
                         </div>
                     </div>
                     <p class="text-muted pt-3 mb-0 mt-2 border-top">

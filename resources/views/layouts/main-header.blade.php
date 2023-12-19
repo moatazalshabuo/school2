@@ -124,24 +124,11 @@ header start-->
                 <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>Activity</a>
                 <a class="dropdown-item" href="#"><i class="text-success ti-email"></i>Messages</a>
                 <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>Profile</a>
-                <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects <span
-                        class="badge badge-info">6</span> </a>
+                <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects 
+                    <span class="badge badge-info">6</span> </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>Settings</a>
-                {{-- @if (auth('student')->check())
-                    <form method="GET" action="{{ route('logout','student') }}">
-                        @elseif(auth('teacher')->check())
-                            <form method="GET" action="{{ route('logout','teacher') }}">
-                                @elseif(auth('parent')->check())
-                                    <form method="GET" action="{{ route('logout','parent') }}">
-                                        @else
-                                            <form method="GET" action="{{ route('logout','web') }}">
-                                                @endif
-
-                                                @csrf
-                                                <a class="dropdown-item" href="#" onclick="event.preventDefault();this.closest('form').submit();"><i class="bx bx-log-out"></i>تسجيل الخروج</a>
-                                            </form> --}}
-
+                <a class="dropdown-item" href="{{ route('logout', 'web') }}">
+                    <i class="text-info ti-logout"></i>logout</a>
             </div>
         </li>
     </ul>

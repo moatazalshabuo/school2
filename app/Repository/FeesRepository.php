@@ -3,7 +3,7 @@
 
 namespace App\Repository;
 
-
+use App\Models\academic_year;
 use App\Models\Fee;
 use App\Models\Grade;
 
@@ -21,7 +21,8 @@ class FeesRepository implements FeesRepositoryInterface
     public function create(){
 
         $Grades = Grade::all();
-        return view('pages.Fees.add',compact('Grades'));
+        $year = academic_year::where(['status'=>1])->get();
+        return view('pages.Fees.add',compact('Grades',"year"));
     }
 
     public function edit($id){
@@ -36,21 +37,18 @@ class FeesRepository implements FeesRepositoryInterface
     public function store($request)
     {
         try {
-
             $fees = new Fee();
             $fees->title = ['en' => $request->title_en, 'ar' => $request->title_ar];
             $fees->amount  =$request->amount;
             $fees->Grade_id  =$request->Grade_id;
             $fees->Classroom_id  =$request->Classroom_id;
             $fees->description  =$request->description;
-            $fees->year  =$request->year;
+            $fees->year_id = $request->year_id;
             $fees->Fee_type  =$request->Fee_type;
             $fees->save();
             toastr()->success(trans('messages.success'));
             return redirect()->route('Fees.create');
-
         }
-
         catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -65,13 +63,12 @@ class FeesRepository implements FeesRepositoryInterface
             $fees->Grade_id  =$request->Grade_id;
             $fees->Classroom_id  =$request->Classroom_id;
             $fees->description  =$request->description;
-            $fees->year  =$request->year;
+            $fees->year_id = $request->year_id;
             $fees->Fee_type  =$request->Fee_type;
             $fees->save();
             toastr()->success(trans('messages.Update'));
             return redirect()->route('Fees.index');
         }
-
         catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -80,7 +77,8 @@ class FeesRepository implements FeesRepositoryInterface
     public function destroy($request)
     {
         try {
-            Fee::destroy($request->id);
+            // print($request->id)
+            Fee::find($request->id)->delete();
             toastr()->error(trans('messages.Delete'));
             return redirect()->back();
         }
