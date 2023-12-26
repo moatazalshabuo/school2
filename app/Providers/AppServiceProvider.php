@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Http\Livewire\SubjecScores;
 use App\Models\Fee;
+use App\Models\Fee_invoice;
 use App\Models\Student;
 use App\Models\SubjectClass;
+use App\Observers\FeeInvoicesObserver;
 use App\Observers\FeeObserver;
 use App\Observers\StudentsObserver;
 use App\Observers\SubjectScoreObserver;
@@ -34,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Student::observe(StudentsObserver::class);
         Fee::observe(FeeObserver::class);
+        Fee_invoice::observe(FeeInvoicesObserver::class);
         // SubjectClass::observe(SubjectScoreObserver::class);
     }
 }

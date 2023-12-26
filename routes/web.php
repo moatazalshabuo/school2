@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Students\StudentController;
 use Illuminate\Support\Facades\Route;
 use MacsiDigital\Zoom\Role;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -91,6 +92,7 @@ Route::group([
         Route::post('Upload_attachment', 'StudentController@Upload_attachment')->name('Upload_attachment');
         Route::get('Download_attachment/{studentsname}/{filename}', 'StudentController@Download_attachment')->name('Download_attachment');
         Route::post('Delete_attachment', 'StudentController@Delete_attachment')->name('Delete_attachment');
+        Route::get('card-st/{id}',[StudentController::class,'card_stu'])->name('card.st');
     });
 
     //==============================subjects============================
@@ -150,7 +152,8 @@ Route::group([
         Route::get('teacher-detile/{id}', 'teacher_courses')->name('teacher_courses');
     });
 
-    Route::get("test",function(){
-        return  QrCode::generate('1');
-    });
+   
 });
+// Route::get("test", function () {
+//     return  view('pages.Students.card');
+// });

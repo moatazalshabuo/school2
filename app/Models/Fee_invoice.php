@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fee_invoice extends Model
 {
+    protected $fillable = ['id', 'invoice_date', 'student_id', 'Grade_id', 'Classroom_id', 'fee_id', 'amount', 'description', 'created_at', 'updated_at'];
+
     public function grade()
     {
         return $this->belongsTo('App\Models\Grade', 'Grade_id');

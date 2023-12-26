@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentsRequest;
+use App\Models\Student;
 use App\Repository\StudentRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -82,6 +83,11 @@ class StudentController extends Controller
     {
         return $this->Student->Delete_attachment($request);
 
+    }
+
+    public function card_stu($id){
+        $student = Student::find($id);
+        return view('pages.Students.card',compact('student'));
     }
 
 }

@@ -3,7 +3,7 @@
 
 namespace App\Repository;
 
-
+use App\Models\academic_year;
 use App\Models\ProcessingFee;
 use App\Models\Student;
 use App\Models\StudentAccount;
@@ -22,6 +22,9 @@ class ProcessingFeeRepository implements ProcessingFeeRepositoryInterface
     public function show($id)
     {
         $student = Student::findorfail($id);
+        $year = academic_year::where('status',1)->orderby($id,'DESC')->get();
+        print_r($year);
+        die();
         return view('pages.ProcessingFee.add',compact('student'));
     }
 

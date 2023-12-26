@@ -43,7 +43,7 @@
                                         @foreach($students as $student)
                                             <tr>
                                             <td>{{ Helper::generateQrCode($student->id) }}</td>
-                                            <td>{{$student->name}}</td>
+                                            <td><a href="{{ route('card.st',$student->id) }}">{{ $student->name }}</a></td>
                                             <td>{{$student->email}}</td>
                                             <td>{{$student->gender->Name}}</td>
                                             <td>{{$student->grade->Name}}</td>

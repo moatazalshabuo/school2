@@ -42,7 +42,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>رصيد الطالب : </label>
+                                    <label>على الطالب : </label>
                                     <input  class="form-control" name="final_balance" value="{{ number_format($student->student_account->sum('Debit') - $student->student_account->sum('credit'), 2) }}" type="text" readonly>
                                 </div>
                             </div>

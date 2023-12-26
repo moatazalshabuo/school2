@@ -9,10 +9,10 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Helper
 {
-    public static function generateQrCode($id)
+    public static function generateQrCode($id,$size = 50)
     {
         // You can also customize the QR code further
-        return QrCode::size(50)
+        return QrCode::size($size)
             ->backgroundColor(255, 255, 255)
             ->generate(strval($id));
     }

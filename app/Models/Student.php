@@ -92,4 +92,9 @@ class Student extends Authenticatable
     {
         return $this->hasMany(SubjectScore::class);
     }
+
+    public function studentFee()
+    {
+        return $this->hasMany(FeeStudents::class);
+    }
 }

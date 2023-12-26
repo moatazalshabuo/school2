@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Models\Fee;
 use App\Models\Fee_invoice;
+use App\Models\FeeStudents;
 use App\Models\Grade;
 use App\Models\Student;
 use App\Models\StudentAccount;
@@ -38,23 +39,22 @@ class FeeInvoicesRepository implements FeeInvoicesRepositoryInterface
     public function store($request)
     {
         $List_Fees = $request->List_Fees;
-
+        $amount = 0;
         DB::beginTransaction();
-
         try {
 
             foreach ($List_Fees as $List_Fee) {
                 // حفظ البيانات في جدول فواتير الرسوم الدراسية
+                $amount += $List_Fee['amount'];
                 $Fees = new Fee_invoice();
                 $Fees->invoice_date = date('Y-m-d');
                 $Fees->student_id = $List_Fee['student_id'];
                 $Fees->Grade_id = $request->Grade_id;
                 $Fees->Classroom_id = $request->Classroom_id;;
                 $Fees->fee_id = $List_Fee['fee_id'];
-                $Fees->amount = $Fees->amount + $List_Fee['amount'];
+                $Fees->amount = $amount;
                 $Fees->description = $List_Fee['description'];
                 $Fees->save();
-
                 // حفظ البيانات في جدول حسابات الطلاب
                 $StudentAccount = new StudentAccount();
                 $StudentAccount->date = date('Y-m-d');
@@ -83,6 +83,13 @@ class FeeInvoicesRepository implements FeeInvoicesRepositoryInterface
         try {
             // تعديل البيانات في جدول فواتير الرسوم الدراسية
             $Fees = Fee_invoice::findorfail($request->id);
+
+            $stu_fee = FeeStudents::where('Fee_id',$Fees->fee_id)->get();
+            if(isset($stu_fee[0])){
+                $stu_fee[0]->amount += $Fees->amount;
+                $stu_fee[0]->save();
+            }
+
             $Fees->fee_id = $request->fee_id;
             $Fees->amount = $request->amount;
             $Fees->description = $request->description;
