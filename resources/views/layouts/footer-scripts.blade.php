@@ -104,6 +104,9 @@
                     dataType: "json",
                     success: function(data) {
                         $('select[name="section_id"]').empty();
+                        $('select[name="section_id"]').append(
+                            '<option selected disabled >اختر الفصل...</option>'
+                            );
                         $.each(data, function(key, value) {
                             $('select[name="section_id"]').append(
                                 '<option value="' + key + '">' + value +
@@ -159,6 +162,7 @@
                     dataType: "json",
                     success: function(data) {
                         $('select[name="section_id_new"]').empty();
+                        
                         $.each(data, function(key, value) {
                             $('select[name="section_id_new"]').append(
                                 '<option value="' + key + '">' + value +

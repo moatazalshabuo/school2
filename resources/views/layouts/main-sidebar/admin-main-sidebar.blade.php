@@ -102,6 +102,8 @@
                         <li> <a href="{{route('Graduated.index')}}">{{trans('main_trans.list_Graduate')}}</a> </li>
                     </ul>
                 </li>
+                <li> <a href="{{route('section.student.index')}}">تخصيص فصول للطلاب</a> </li>
+
             </ul>
         </li>
    
@@ -147,7 +149,7 @@
                 <li> <a href="{{route('Fees_Invoices.index')}}">الفواتير</a> </li>
                 <li> <a href="{{route('receipt_students.index')}}">سندات القبض</a> </li>
                 <li> <a href="{{route('ProcessingFee.index')}}">استبعاد رسوم</a> </li>
-                <li> <a href="{{route('Payment_students.index')}}">سندت الصرف</a> </li>
+                {{-- <li> <a href="{{route('Payment_students.index')}}">سندت الصرف</a> </li> --}}
             </ul>
         </li>
 

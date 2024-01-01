@@ -16,5 +16,6 @@ Route::group(['middleware' => 'auth:teacher,web'], function () {
 Route::get('/Get_classrooms/{id}', 'AjaxController@getClassrooms');
 Route::get('/Get_Sections/{id}', 'AjaxController@Get_Sections');
 Route::get('/Get_sections_cl/{id}','AjaxController@Get_Sections_cl');
+Route::post('/TransformStu','AjaxController@TransformStuSec')->name('TransformStuSec');
 });
 

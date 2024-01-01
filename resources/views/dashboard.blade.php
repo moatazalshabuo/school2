@@ -279,7 +279,7 @@
                                     </div>
 
                                     {{--sections Table--}}
-                                    <div class="tab-pane fade" id="fee_invoices" role="tabpanel" aria-labelledby="fee_invoices-tab">
+                                    {{-- <div class="tab-pane fade" id="fee_invoices" role="tabpanel" aria-labelledby="fee_invoices-tab">
                                         <div class="table-responsive mt-15">
                                             <table style="text-align: center" class="table center-aligned-table table-hover mb-0">
                                                 <thead>
@@ -311,7 +311,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
 

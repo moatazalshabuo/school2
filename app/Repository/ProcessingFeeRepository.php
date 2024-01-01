@@ -4,6 +4,7 @@
 namespace App\Repository;
 
 use App\Models\academic_year;
+use App\Models\FeeStudents;
 use App\Models\ProcessingFee;
 use App\Models\Student;
 use App\Models\StudentAccount;
@@ -21,10 +22,13 @@ class ProcessingFeeRepository implements ProcessingFeeRepositoryInterface
 
     public function show($id)
     {
-        $student = Student::findorfail($id);
-        $year = academic_year::where('status',1)->orderby($id,'DESC')->get();
-        print_r($year);
-        die();
+        
+        $year = academic_year::where('status',1)->orderby('id','DESC')->get();
+        // $student = Student::findorfail($id);
+        $student = Student::select('students.*','fee_students.amount','fees.id as fee_id')
+        ->join('fee_students','fee_students.St_id','=','students.id')
+        ->join('fees','fees.id','=','fee_students.Fee_id')->where('students.id',$id)->get()->first();
+        
         return view('pages.ProcessingFee.add',compact('student'));
     }
 
@@ -39,11 +43,13 @@ class ProcessingFeeRepository implements ProcessingFeeRepositoryInterface
         DB::beginTransaction();
 
         try {
+            
             // حفظ البيانات في جدول معالجة الرسوم
             $ProcessingFee = new ProcessingFee();
             $ProcessingFee->date = date('Y-m-d');
             $ProcessingFee->student_id = $request->student_id;
             $ProcessingFee->amount = $request->Debit;
+            $ProcessingFee->fee_id = $request->fee_id;
             $ProcessingFee->description = $request->description;
             $ProcessingFee->save();
 
@@ -75,10 +81,17 @@ class ProcessingFeeRepository implements ProcessingFeeRepositoryInterface
 
         try {
             // تعديل البيانات في جدول معالجة الرسوم
-            $ProcessingFee = ProcessingFee::findorfail($request->id);;
+            $ProcessingFee = ProcessingFee::findorfail($request->id);
+            $stu_fee = FeeStudents::where('Fee_id',$ProcessingFee->fee_id)->get();
+            if(isset($stu_fee[0])){
+                $stu_fee[0]->amount += $ProcessingFee->amount;
+                $stu_fee[0]->save();
+            }
             $ProcessingFee->date = date('Y-m-d');
             $ProcessingFee->student_id = $request->student_id;
+            
             $ProcessingFee->amount = $request->Debit;
+
             $ProcessingFee->description = $request->description;
             $ProcessingFee->save();
 

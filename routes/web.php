@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Students\StudentController;
+use App\Http\Controllers\StudentSectionsController;
 use Illuminate\Support\Facades\Route;
 use MacsiDigital\Zoom\Role;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -152,7 +153,9 @@ Route::group([
         Route::get('teacher-detile/{id}', 'teacher_courses')->name('teacher_courses');
     });
 
-   
+   Route::controller(StudentSectionsController::class)->group(function(){
+    Route::get('sec-stu','index')->name('section.student.index');
+   });
 });
 // Route::get("test", function () {
 //     return  view('pages.Students.card');
