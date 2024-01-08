@@ -184,7 +184,6 @@
             console.log('AJAX load did not work');
         }
     };
-
     $(function() {
         $("#save_tr").click(function() {
             if (ListStudents.length != 0) {

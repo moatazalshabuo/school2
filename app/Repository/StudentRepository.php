@@ -123,7 +123,6 @@ class StudentRepository implements StudentRepositoryInterface
                 $parent->Blood_Type_Mother_id = $request->Blood_Type_Mother_id;
                 $parent->Religion_Mother_id = $request->Religion_Mother_id;
                 $parent->Address_Mother = $request->Address_Mother;
-
                 $parent->save();
             }
             // حفظ بيانات الطالب
@@ -138,18 +137,13 @@ class StudentRepository implements StudentRepositoryInterface
             $students->Grade_id = $request->Grade_id;
             $students->Classroom_id = $request->Classroom_id;
             $students->section_id = $request->section_id;
-
             // التحقق من أن $students ليس null قبل تعيين parent_id
             if ($students) {
                 // إذا تم اختيار "Add"، استخدم القيمة المحددة من الـ Select
                 if ($request->parent_option == 'add') {
-
                     $students->parent_id = $parent->id;
-                
-                } else {
-                    // تم اختيار "Select"، استخدم القيمة المحددة من الـ Select
+                } else { // تم اختيار "Select"، استخدم القيمة المحددة من الـ Select
                     $students->parent_id = $request->parent_id;
-
                 }
                 $students->academic_year_id = $request->academic_year_id;
                 $students->save();
@@ -166,7 +160,6 @@ class StudentRepository implements StudentRepositoryInterface
                 foreach ($request->file('photos') as $file) {
                     $name = $file->getClientOriginalName();
                     $file->storeAs('attachments/students/' . $students->name, $name, 'upload_attachments');
-
                     // insert in image_table
                     $images = new Image();
                     $images->filename = $name;
@@ -187,7 +180,6 @@ class StudentRepository implements StudentRepositoryInterface
 
     public function Delete_Student($request)
     {
-
         Student::destroy($request->id);
         toastr()->error(trans('messages.Delete'));
         return redirect()->route('Students.index');
