@@ -67,10 +67,10 @@
                                     <td>
                                         @if ($academicYear->status === 1)
                                             <label
-                                                class="badge badge-success">{{ trans('Grades_trans.active') }}</label>
+                                                class="badge badge-success">مفعل</label>
                                         @else
                                             <label
-                                                class="badge badge-danger">{{ trans('Grades_trans.inactive') }}</label>
+                                                class="badge badge-danger">غير مفعل</label>
                                         @endif
 
                                     </td>
