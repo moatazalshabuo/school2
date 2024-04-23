@@ -34,7 +34,8 @@ class StudentRepository implements StudentRepositoryInterface
         $data['nationals'] = Nationalitie::all();
         $data['bloods'] = Type_Blood::all();
         $Students =  Student::findOrFail($id);
-        return view('pages.Students.edit', $data, compact('Students'));
+        $acadmy_year = academic_year::where('status',1)->get();
+        return view('pages.Students.edit', $data, compact('Students','acadmy_year'));
     }
 
     public function Update_Student($request)
@@ -43,7 +44,6 @@ class StudentRepository implements StudentRepositoryInterface
             $Edit_Students = Student::findorfail($request->id);
             $Edit_Students->name = ['ar' => $request->name_ar, 'en' => $request->name_en];
             $Edit_Students->email = $request->email;
-            $Edit_Students->password = Hash::make($request->password);
             $Edit_Students->gender_id = $request->gender_id;
             $Edit_Students->nationalitie_id = $request->nationalitie_id;
             $Edit_Students->blood_id = $request->blood_id;
