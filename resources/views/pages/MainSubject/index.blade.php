@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="title">اسم المادة باللغة الانجليزية</label>
-                                    <input type="text" name="Name_en" class="form-control" value="{{old('Name_ar')}}">
+                                    <input type="text" name="Name_en" class="form-control" value="{{old('Name_en')}}">
                                 </div>
                             </div>
                             <br>
@@ -77,16 +77,62 @@
                                                 <td>{{ $subject->name }}</td>
                                                 <td>{{ $subject->summry }}</td>
                                                 <td>
-                                                    {{-- <a href="{{ route('subjects.edit', $subject->id) }}"
-                                                        class="btn btn-info btn-sm" role="button"
-                                                        aria-pressed="true"><i class="fa fa-edit"></i></a> --}}
+                                                    <button type="button" class="btn btn-info btn-sm"
+                                                        data-toggle="modal"
+                                                        data-target="#edit_subject{{ $subject->id }}"
+                                                        title="تعديل"><i class="fa fa-edit"></i>
+                                                    </button>
                                                     <button type="button" class="btn btn-danger btn-sm"
                                                         data-toggle="modal"
                                                         data-target="#delete_subject{{ $subject->id }}"
-                                                        title="حذف"><i class="fa fa-trash"></i></button>
+                                                        title="حذف"><i class="fa fa-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
-
+                                           {{-- edit --}}
+                                           <div class="modal fade" id="edit_subject{{ $subject->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <form action="{{ route('subject.update', $subject->id) }}" method="post">
+                                                    {{ method_field('patch') }}
+                                                    {{ csrf_field() }}
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">تعديل مادة دراسية</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-row">
+                                                                <div class="col">
+                                                                    <label for="title">اسم المادة باللغة العربية</label>
+                                                                    
+                                                                    <input type="text" name="Name_ar" class="form-control"value="{{ $subject->getTranslation('name','ar') }}" >
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label for="title">اسم المادة باللغة الانجليزية</label>
+                                                                    <input type="text" name="Name_en" class="form-control" value="{{ $subject->getTranslation('name','en') }}">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="form-group mt-3">
+                                                                <label for="summry">{{ trans("Grades_trans.summry") }}</label>
+                                                                <textarea class="form-control" id="summry" name="summry">{{ $subject->summry }}</textarea>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                            {{-- <input type="text" name="name" value="{{ $subject->name }}">
+                                                            <input type="text" name="summry" value="{{ $subject->summry }}"> --}}
+                                                       
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                                                            <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
                                             <div class="modal fade" id="delete_subject{{ $subject->id }}"
                                                 tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                 aria-hidden="true">

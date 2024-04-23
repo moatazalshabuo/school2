@@ -98,7 +98,17 @@
                                         {{ $My_Class->Periods }}
                                     </td>
                                     <td>
+                                        <a href="{{ route('Classrooms.edit', ['Classroom' => $My_Class->id]) }}" class="btn btn-info btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        
                                         {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+        data-target="{{ route('Classrooms.edit', ['id' => $My_Class->id]) }}"
+        title="{{ trans('Grades_trans.Edit') }}">
+    <i class="fa fa-edit"></i>
+</button> --}}
+{{-- 
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                             data-target="#edit{{ $My_Class->id }}"
                                             title="{{ trans('Grades_trans.Edit') }}"><i
                                                 class="fa fa-edit"></i></button> --}}
@@ -110,7 +120,7 @@
                                 </tr>
 
                                 <!-- edit_modal_Grade -->
-                                {{-- <div class="modal fade" id="edit{{ $My_Class->id }}" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="edit{{ $My_Class->id }}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -180,7 +190,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
 
 
                                 <!-- delete_modal_Grade -->

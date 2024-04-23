@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Classrooms;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClassroom;
+use App\Http\Requests\UpdateClassroom;
 use App\Models\Classroom;
 use App\Models\Grade;
 use App\Models\MainSubjects;
@@ -47,10 +48,6 @@ class ClassroomController extends Controller
      */
     public function store(StoreClassroom $request)
     {
-
-
-
-
         try {
 
             foreach (Classroom::all() as $val) {
@@ -110,8 +107,13 @@ class ClassroomController extends Controller
      * @return Response
      */
     public function edit($id)
-    {
-    }
+{
+    $classroom = Classroom::findOrFail($id);
+    $Grades = Grade::all();
+    $subjects = MainSubjects::all();
+    return view('pages.My_Classes.edit', compact('classroom', 'Grades', 'subjects'));
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -119,25 +121,59 @@ class ClassroomController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request)
-    {
+   
+    
 
-        try {
+    public function update(StoreClassroom $request, $id)
+{
+    try {
+        $classroom = Classroom::findOrFail($id);
 
-            $Classrooms = Classroom::findOrFail($request->id);
-
-            $Classrooms->update([
-
-                $Classrooms->Name_Class = ['ar' => $request->Name, 'en' => $request->Name_en],
-                $Classrooms->Grade_id = $request->Grade_id,
-            ]);
-            toastr()->success(trans('messages.Update'));
-            return redirect()->route('Classrooms.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        // Check if the name is already taken by another classroom
+        foreach (Classroom::where('id', '!=', $id)->get() as $val) {
+            if ($val->Name_Class == $request->Name || $val->Name_Class == $request->Name_class_en) {
+                if (app()->getLocale() == 'ar') {
+                    throw new ValidationException('اسم الصف موجود مسبقا');
+                } else {
+                    throw new ValidationException('The name of the class already exists');
+                }
+            }
         }
-    }
 
+        $validated = $request->validated();
+        $classroom->Name_Class = ['en' => $request->Name_class_en, 'ar' => $request->Name];
+        $classroom->Periods = $request->Periods;
+        $classroom->Grade_id = $request->Grade_id;
+        $classroom->save();
+
+        // Update the associated subjects
+        $existingSubjectIds = $classroom->subject()->pluck('main_subject_id')->toArray();
+        $newSubjectIds = $request->subject_id;
+
+        // Detach removed subjects
+        $removedSubjectIds = array_diff($existingSubjectIds, $newSubjectIds);
+        foreach ($removedSubjectIds as $subjectId) {
+            SubjectClass::where('main_subject_id', $subjectId)
+                ->where('class_room_id', $classroom->id)
+                ->delete();
+        }
+
+        // Attach new subjects
+        $addedSubjectIds = array_diff($newSubjectIds, $existingSubjectIds);
+        foreach ($addedSubjectIds as $subjectId) {
+            SubjectClass::create([
+                'main_subject_id' => $subjectId,
+                'class_room_id' => $classroom->id
+            ]);
+        }
+
+        toastr()->success(trans('messages.success'));
+        return redirect()->route('Classrooms.index');
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+    }
+}
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -146,7 +182,6 @@ class ClassroomController extends Controller
      */
     public function destroy(Request $request)
     {
-
         $Classrooms = Classroom::findOrFail($request->id)->delete();
         toastr()->error(trans('messages.Delete'));
         return redirect()->route('Classrooms.index');

@@ -96,10 +96,33 @@ class MainSubjectsController extends Controller
      * @param  \App\Models\MainSubjects  $mainSubjects
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MainSubjects $mainSubjects)
-    {
-        //
+    public function update(Request $request, $id)
+{
+    try {
+        $subject = MainSubjects::findOrFail($id);
+
+        foreach(MainSubjects::all() as $val){
+            if(($val->name == $request->Name_ar || $val->name == $request->Name_en) && $val->id != $id){
+                if(app()->getLocale() == 'ar'){
+                    throw new ValidationException('اسم المادة موجود مسبقا');
+                }else{
+                    throw new ValidationException('The name of the material already exists');
+                }  
+            }
+        }
+        $subject->name = ['en' => $request->Name_en, 'ar' => $request->Name_ar];
+        // die($subject);
+        // $subject->summry = $request->summry;
+        $subject->save();
+        toastr()->success(trans('messages.success'));
+        
+        return redirect()->route('subject.index');
     }
+    catch (\Exception $e) {
+        return redirect()->back()->with(['error' => $e->getMessage()]);
+    }
+}
+
 
     /**
      * Remove the specified resource from storage.

@@ -107,12 +107,10 @@
                                                 <form action="{{ route('Grades.update', 'test') }}" method="post">
                                                     {{ method_field('patch') }}
                                                     @csrf
-
-
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <label>{{ trans("Grades_trans.stage_name_ar") }}</label>
-                                                            <input type="text" class="form-control" value="{{ $academicYear->getTranslation('academic_year','ar') }}" required name="Name_en">
+                                                            <input type="text" class="form-control" value="{{ $academicYear->getTranslation('academic_year','ar') }}" required name="Name_ar">
                                                         </div>
                                                         <div class="col-6">
                                                             <label>{{ trans("Grades_trans.stage_name_en") }}</label>
@@ -254,7 +252,6 @@
                                 <input id="end_date" type="date" name="end_date" class="form-control"
                                     min="{{ date('Y-m-d', strtotime('+1 year')) }}"
                                     value="{{ date('Y-m-d', strtotime('+1 year')) }}">
-
                             </div>
                         </div>
                         <div class="col">

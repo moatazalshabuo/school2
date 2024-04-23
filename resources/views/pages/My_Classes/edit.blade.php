@@ -2,13 +2,13 @@
 @section('css')
     @toastr_css
 @section('title')
-    اضافة صف جديد
+    تعديل صف
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-    اضافة صف جديد
+    تعديل صف
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -28,63 +28,56 @@
                         </ul>
                     </div>
                 @endif
-                <form class="mb-30" action="{{ route('Classrooms.store') }}" method="POST"
+                <form class="mb-30" action="{{ route('Classrooms.update', $classroom->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     <div class="row">
-
                         <div class="col-6">
-                            <label for="Name" class="mr-sm-2">{{ trans('My_Classes_trans.Name_class') }}
-                                :</label>
-                            <input class="form-control" type="text" value="{{ old('Name') }}" name="Name" />
+                            <label for="Name" class="mr-sm-2">{{ trans('My_Classes_trans.Name_class') }}:</label>
+                            <input class="form-control" type="text" value="{{ $classroom->getTranslation('Name_Class','ar') }} " name="Name" />
                         </div>
                         <div class="col-6">
-                            <label for="Name" class="mr-sm-2">{{ trans('My_Classes_trans.Name_class_en') }}
-                                :</label>
-                            <input class="form-control" type="text" name="Name_class_en"
-                                value="{{ old('Name_class_en') }}" />
+                            <label for="Name" class="mr-sm-2">{{ trans('My_Classes_trans.Name_class_en') }}:</label>
+                            <input class="form-control" type="text" 
+                            value="{{ $classroom->getTranslation('Name_Class','en') }} " name="Name_class_en" />
                         </div>
 
-
                         <div class="col-6">
-                            <label for="Name_en" class="mr-sm-2">{{ trans('My_Classes_trans.Name_Grade') }}
-                                :</label>
-
+                            <label for="Name_en" class="mr-sm-2">{{ trans('My_Classes_trans.Name_Grade') }}:</label>
                             <div class="box">
                                 <select class="fancyselect w-100" required name="Grade_id">
                                     @foreach ($Grades as $Grade)
-                                        <option value="{{ $Grade->id }}">
+                                        <option value="{{ $Grade->id }}" @if($Grade->id == $classroom->Grade_id) selected @endif>
                                             {{ $Grade->Name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
                         </div>
-
+                  
                         <div class="col-6">
-                            <label for="Name_en" class="mr-sm-2">{{ trans('My_Classes_trans.Subject_of_class') }}
-                                :</label>
-
+                            <label for="Name_en" class="mr-sm-2">{{ trans('My_Classes_trans.Subject_of_class') }}:</label>
                             <div class="box">
                                 <select class="select2 w-100" required name="subject_id[]" multiple>
                                     @foreach ($subjects as $sub)
-                                        <option value="{{ $sub->id }}">
+                                        <option value="{{ $sub->id }}" 
+                                            @foreach ($classroom->subject as $item)
+                                                {{ $item->main_subject_id == $sub->id ? 'selected' : '' }}
+                                            @endforeach>
                                             {{ $sub->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
-
                         </div>
+                        
+
                         <div class="col-6">
-                            <label for="Name" class="mr-sm-2">{{ trans('My_Classes_trans.Periods') }}
-                                :</label>
+                            <label for="Name" class="mr-sm-2">{{ trans('My_Classes_trans.Periods') }}:</label>
                             <input class="form-control" type="number" name="Periods"
-                                value="{{ old('Periods') }}" />
+                                value="{{ $classroom->Periods }}" />
                         </div>
-
-
                     </div>
                     <button type="submit" class="btn btn-success">{{ trans('Grades_trans.submit') }}</button>
                 </form>
