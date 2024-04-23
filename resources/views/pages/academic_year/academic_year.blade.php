@@ -104,7 +104,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('Grades.update', 'test') }}" method="post">
+                                                <form action="{{ route('academic_year.update', $academicYear->id) }}" method="post">
                                                     {{ method_field('patch') }}
                                                     @csrf
 
@@ -186,7 +186,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('academic_year.destroy', 'test') }}"
+                                                <form action="{{ route('academic_year.destroy', $academicYear->id) }}"
                                                     method="post">
                                                     {{ method_field('Delete') }}
                                                     @csrf

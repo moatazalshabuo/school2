@@ -59,13 +59,6 @@
                             </div>
 
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>{{trans('Students_trans.password')}} :</label>
-                                    <input value="{{ $Students->password }}" type="password" name="password" class="form-control" >
-                                </div>
-                            </div>
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="gender">{{trans('Students_trans.gender')}} : <span class="text-danger">*</span></label>
