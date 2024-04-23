@@ -65,7 +65,7 @@
                                     <td>{{ $academicYear->start_date }}</td>
                                     <td>{{ $academicYear->end_date }}</td>
                                     <td>
-                                        @if ($academicYear->status === 1)
+                                        @if ($academicYear->status == 1)
                                             <label
                                                 class="badge badge-success">مفعل</label>
                                         @else
