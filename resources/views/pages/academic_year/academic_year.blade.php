@@ -65,12 +65,12 @@
                                     <td>{{ $academicYear->start_date }}</td>
                                     <td>{{ $academicYear->end_date }}</td>
                                     <td>
-                                        @if ($academicYear->status === 1)
+                                        @if ($academicYear->status == 1)
                                             <label
-                                                class="badge badge-success">{{ trans('Grades_trans.active') }}</label>
+                                                class="badge badge-success">مفعل</label>
                                         @else
                                             <label
-                                                class="badge badge-danger">{{ trans('Grades_trans.inactive') }}</label>
+                                                class="badge badge-danger">غير مفعل</label>
                                         @endif
 
                                     </td>
@@ -104,7 +104,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('Grades.update', 'test') }}" method="post">
+                                                <form action="{{ route('academic_year.update', $academicYear->id) }}" method="post">
                                                     {{ method_field('patch') }}
                                                     @csrf
                                                     <div class="row">
@@ -184,7 +184,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('academic_year.destroy', 'test') }}"
+                                                <form action="{{ route('academic_year.destroy', $academicYear->id) }}"
                                                     method="post">
                                                     {{ method_field('Delete') }}
                                                     @csrf

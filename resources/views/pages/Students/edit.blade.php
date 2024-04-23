@@ -29,7 +29,7 @@
                     </div>
                 @endif
 
-                    <form action="{{route('Students.update','test')}}" method="post" autocomplete="off">
+                    <form action="{{route('Students.update',$Students->id)}}" method="post" autocomplete="off">
                         @method('PUT')
                         @csrf
                     <h6 style="font-family: 'Cairo', sans-serif;color: blue">{{trans('Students_trans.personal_information')}}</h6><br>
@@ -58,13 +58,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>{{trans('Students_trans.password')}} :</label>
-                                    <input value="{{ $Students->password }}" type="password" name="password" class="form-control" >
-                                </div>
-                            </div>
 
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -163,9 +156,9 @@
                                     @php
                                         $current_year = date("Y");
                                     @endphp
-                                    @for($year=$current_year; $year<=$current_year +1 ;$year++)
-                                        <option value="{{ $year}}" {{$year == $Students->academic_year ? 'selected' : ' '}}>{{ $year }}</option>
-                                    @endfor
+                                    @foreach($acadmy_year as $year)
+                                        <option value="{{ $year->id }}" {{$year->id == $Students->academic_year ? 'selected' : ' '}}>{{ $year->academic_year }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

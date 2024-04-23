@@ -48,8 +48,19 @@ class StudentController extends Controller
     }
 
 
-    public function update(StoreStudentsRequest $request)
+    public function update(Request $request,$id)
     {
+        $request->validate(['name_ar' => 'required',
+        'name_en' => 'required',
+        'email' => 'required|email|unique:students,email,'.$id,
+        'gender_id' => 'required',
+        'nationalitie_id' => 'required',
+        'blood_id' => 'required',
+        'Date_Birth' => 'required|date|date_format:Y-m-d',
+        'Grade_id' => 'required',
+        'Classroom_id' => 'required',
+        'section_id' => 'required',]);
+
         return $this->Student->Update_Student($request);
     }
 
